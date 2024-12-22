@@ -1,0 +1,39 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.build/
+packages/
+
+# Android related
+*.apk
+*.apks
+*.aab
+.idea/
+.gradle/
+local.properties
+*.iml
+
+# iOS related
+*.xcuserstate
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/Podfile.lock
+ios/.symlinks/
+xcuserdata/
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Build generated
+*.log
+*.class
+*.apk
+*.dSYM/
+
+# MacOS related
+.DS_Store
+
+# Linux related
+*~
