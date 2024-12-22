@@ -8,7 +8,8 @@ TODO: Number of moves, history of moves
 
 import 'package:p2p_chess/Model/piece.dart';
 
+import 'piece.dart';
+
 class Board {
   Set<Piece>? pieces;
-  set 
 }

@@ -1,14 +1,28 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Chessboard extends StatelessWidget {
   Chessboard();
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: ChessboardPainter(),
-      child: Container(),
+    return Stack(
+      children: [
+        CustomPaint(
+          painter: ChessboardPainter(),
+          child: Container(),
+        ),
+        Positioned(
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: MediaQuery.of(context).size.height * 0.5,
+          child: Container(
+            margin: EdgeInsets.all(16.0),
+            child:  SvgPicture.asset('assets/images/chess_pieces/WHITE_CHESS_PAWN.svg'),
+          )
+        )
+       
+      ]
     );
   }
 }

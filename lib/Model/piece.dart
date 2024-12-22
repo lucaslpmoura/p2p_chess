@@ -20,6 +20,9 @@ class Piece {
   Set<Move>? _moves;
   Set<Move>? get moves => _moves;
 
+  Coordinate? initialPosition;
+  Coordinate? position;
+
   bool? isInPlay;
 
   Piece({required this.type}){
@@ -61,4 +64,20 @@ class Move{
   MoveType? moveType;
 
   Move({required this.displacement, required this.moveType}); 
+}
+
+class Coordinate{
+  Coordinate(int x, int y){
+    this._coord = [x,y];
+  }
+  CoordinateFromArray(List<int> coord){
+    this._coord = coord;
+  }
+
+  List<int>? _coord;
+
+  int? get xPos => _coord == null ? null : _coord?[0];
+  int? get yPos => _coord == null ? null : _coord?[1];
+  List<int>? get coord => _coord;
+  
 }

@@ -1,0 +1,14 @@
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/icudtl.dat
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/shaders/ink_sparkle.frag
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.bin
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.json
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/NOTICES.Z
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/assets/images/chess_pieces/light_pawn.png
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/assets/images/chess_pieces/WHITE_CHESS_PAWN.svg
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/version.json
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/FontManifest.json
+/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets/kernel_blob.bin
