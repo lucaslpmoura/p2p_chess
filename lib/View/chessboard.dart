@@ -1,29 +1,70 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:p2p_chess/Controller/game_controller.dart';
+import 'package:p2p_chess/Model/board.dart';
+import 'package:p2p_chess/Model/coordinate.dart';
+import 'package:p2p_chess/Model/piece.dart';
+import 'package:p2p_chess/View/move_indicator.dart';
+import 'package:p2p_chess/View/piece_widget.dart';
 
-class Chessboard extends StatelessWidget {
-  Chessboard();
+
+class Chessboard extends StatefulWidget{
+  Chessboard({super.key});
+
+  State<Chessboard> createState() => _ChessboardState();
+
+}
+
+class _ChessboardState extends State<Chessboard> {
+
+  double squareSize = 0;
+  GameController gameController = GameController();
+  Set<Move>? _currentMoves;
+  Piece? selectedPiece;
 
   @override
   Widget build(BuildContext context) {
+    squareSize = MediaQuery.of(context).size.shortestSide / 8;
+    var piecesWidgets = getAllPiecesWidgets(testBoard, MediaQuery.of(context).size);
+    var movesWidgets = drawPieceMoves(_currentMoves);
+
+    List<Widget> drawObjects = [];
+    drawObjects.add(CustomPaint(painter: ChessboardPainter(), child: Container())); // Chessboard background
+    drawObjects += piecesWidgets;
+    if(movesWidgets != null){
+      drawObjects.add(movesWidgets);
+    }
     return Stack(
-      children: [
-        CustomPaint(
-          painter: ChessboardPainter(),
-          child: Container(),
-        ),
-        Positioned(
-          width: MediaQuery.of(context).size.width * 0.5,
-          height: MediaQuery.of(context).size.height * 0.5,
-          child: Container(
-            margin: EdgeInsets.all(16.0),
-            child:  SvgPicture.asset('assets/images/chess_pieces/WHITE_CHESS_PAWN.svg'),
-          )
-        )
-       
-      ]
+      children: drawObjects
     );
+  }
+
+  void getPieceMoves(Piece piece){
+    setState(() {
+      selectedPiece = piece;
+      _currentMoves = gameController.getPieceMoves(piece);  
+    });
+    
+  }
+
+  List<Widget> getAllPiecesWidgets(Board board, Size size){
+    List<Widget> piecesWidgets = [];
+    for (Piece piece in board.pieces!){
+      piecesWidgets.add(PieceWidget(squareSize: squareSize, piece: piece, onTap: getPieceMoves));
+    }
+    return piecesWidgets;
+  }
+
+  CustomPaint? drawPieceMoves(Set<Move>? moves){
+    if(selectedPiece != null && moves != null && moves.isNotEmpty){
+        return CustomPaint(
+          painter: MoveIndicatorPainter(squareSize: squareSize, piece: selectedPiece, moves: moves),
+          child: Container(),
+      );
+    }else{
+      return null;
+    }
+    
   }
 }
 

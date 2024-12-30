@@ -5,6 +5,8 @@ Class representing a piece
 Enumerates its type, moves, and color
 */
 
+import 'package:p2p_chess/Model/coordinate.dart';
+
 enum Type{
   PAWN,
   KNIGHT,
@@ -23,19 +25,26 @@ class Piece {
   Coordinate? initialPosition;
   Coordinate? position;
 
+  /*
+  The View classes and function have the Y axis inverted,
+  so this is an QOL parameter used for rendering
+  */
+  DrawCoordinate? drawPosition;
+
   bool? isInPlay;
 
-  Piece({required this.type}){
+  Piece({required this.type, required this.position}){
     _generateMoves();
+    drawPosition = DrawCoordinate(position!.xPos!, position!.yPos!);
   }
 
   void _generateMoves(){
     switch(type){
       case Type.PAWN:
         _moves = {
-          Move(displacement: [0,1], moveType: MoveType.SIMPLE_MOVE),
-          Move(displacement: [1,1], moveType: MoveType.CAPTURE),
-          Move(displacement: [-1,1], moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(0,1), moveType: MoveType.SIMPLE_MOVE),
+          Move(displacement: Coordinate(1,1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(-1,1), moveType: MoveType.CAPTURE),
         };
         break;
       case Type.KNIGHT:
@@ -48,6 +57,7 @@ class Piece {
         break;
     }
   }
+
 }
 
 enum MoveType {
@@ -57,27 +67,16 @@ enum MoveType {
 
 class Move{
   /*
-  [x,y] displacement
+  The relative displacement
   from the POV of the piece
   */
-  List<int>? displacement;
+  Coordinate? displacement;
   MoveType? moveType;
 
   Move({required this.displacement, required this.moveType}); 
+
+  Coordinate getMoveAbsoluteCoordinate(Piece piece){
+    return piece.position! + this.displacement!;
+  }
 }
 
-class Coordinate{
-  Coordinate(int x, int y){
-    this._coord = [x,y];
-  }
-  CoordinateFromArray(List<int> coord){
-    this._coord = coord;
-  }
-
-  List<int>? _coord;
-
-  int? get xPos => _coord == null ? null : _coord?[0];
-  int? get yPos => _coord == null ? null : _coord?[1];
-  List<int>? get coord => _coord;
-  
-}
