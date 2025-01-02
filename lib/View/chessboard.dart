@@ -44,14 +44,24 @@ class _ChessboardState extends State<Chessboard> {
 
   void getPieceMoves(Piece piece){
     setState(() {
-      selectedPiece = piece;
-      _currentMoves = gameController.getPieceMoves(piece);  
+      if(selectedPiece == null){
+        selectedPiece = piece;
+        _currentMoves = gameController.getPieceMoves(piece);
+      }else{
+        if(piece == selectedPiece){
+          selectedPiece = null;
+          _currentMoves = null;
+        }
+      }
+       
     });
   }
 
   void movePiece(Piece piece, Move move){
     setState(() {
       gameController.movePiece(piece, move);
+      selectedPiece = null;
+      _currentMoves = null;
     });
   }
 
