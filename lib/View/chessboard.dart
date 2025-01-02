@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:p2p_chess/Controller/game_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
@@ -21,18 +23,19 @@ class _ChessboardState extends State<Chessboard> {
   GameController gameController = GameController();
   Set<Move>? _currentMoves;
   Piece? selectedPiece;
+  List<Widget>? movesWidgets;
 
   @override
   Widget build(BuildContext context) {
     squareSize = MediaQuery.of(context).size.shortestSide / 8;
     var piecesWidgets = getAllPiecesWidgets(testBoard, MediaQuery.of(context).size);
-    var movesWidgets = drawPieceMoves(_currentMoves);
+    movesWidgets = drawPieceMoves(_currentMoves);
 
     List<Widget> drawObjects = [];
     drawObjects.add(CustomPaint(painter: ChessboardPainter(), child: Container())); // Chessboard background
     drawObjects += piecesWidgets;
     if(movesWidgets != null){
-      drawObjects.add(movesWidgets);
+      drawObjects += movesWidgets!;
     }
     return Stack(
       children: drawObjects
@@ -44,7 +47,12 @@ class _ChessboardState extends State<Chessboard> {
       selectedPiece = piece;
       _currentMoves = gameController.getPieceMoves(piece);  
     });
-    
+  }
+
+  void movePiece(Piece piece, Move move){
+    setState(() {
+      gameController.movePiece(piece, move);
+    });
   }
 
   List<Widget> getAllPiecesWidgets(Board board, Size size){
@@ -55,15 +63,15 @@ class _ChessboardState extends State<Chessboard> {
     return piecesWidgets;
   }
 
-  CustomPaint? drawPieceMoves(Set<Move>? moves){
+  List<Widget>? drawPieceMoves(Set<Move>? moves){
+    List<Widget>? pieceMoves;
     if(selectedPiece != null && moves != null && moves.isNotEmpty){
-        return CustomPaint(
-          painter: MoveIndicatorPainter(squareSize: squareSize, piece: selectedPiece, moves: moves),
-          child: Container(),
-      );
-    }else{
-      return null;
+      pieceMoves = [];
+      for(Move move in moves){
+        pieceMoves.add(MoveIndicator(squareSize: squareSize, piece: selectedPiece, move: move, onTap: movePiece));
+      }
     }
+    return pieceMoves;
     
   }
 }

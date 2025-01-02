@@ -35,6 +35,10 @@ class Piece {
 
   Piece({required this.type, required this.position}){
     _generateMoves();
+    updateDrawPosition();
+  }
+
+  void updateDrawPosition(){
     drawPosition = DrawCoordinate(position!.xPos!, position!.yPos!);
   }
 

@@ -10,31 +10,65 @@ import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
 import 'dart:developer';
 
-class MoveIndicatorPainter extends CustomPainter {
+class MoveIndicator extends StatelessWidget {
   Piece? piece;
-  Set<Move>? moves;
+  Move? move;
+  double? squareSize;
+  Function? onTap;
+  Coordinate? coord;
+  DrawCoordinate? drawCoord;
+
+  MoveIndicator({required this.squareSize,  required this.piece, required this.move, required this.onTap}) {
+     coord = piece!.position! + move!.displacement!;
+      drawCoord = DrawCoordinate(coord!.xPos!, coord!.yPos!);
+  }
+
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: squareSize! * drawCoord!.yPos!,
+      left: squareSize! * drawCoord!.xPos!,
+      width: squareSize! ,
+      height: squareSize!,
+      child: CustomPaint(
+        painter: _MoveIndicatorPainter(squareSize: squareSize, piece: piece, move: move),
+        child: GestureDetector(
+        onTap: () => onTap!(piece, move)
+        )
+      ),
+    );
+  }
+}
+/*
+CustomPaint(
+        painter: _MoveIndicatorPainter(squareSize: squareSize, piece: piece, move: move),
+        child: GestureDetector(
+        onTap: () => onTap!(piece, move)
+        )
+      ),
+*/
+
+class _MoveIndicatorPainter extends CustomPainter {
+  Piece? piece;
+  Move? move;
   double? squareSize;
 
   Paint _paint = Paint();
 
-  MoveIndicatorPainter({required this.squareSize,  this.piece, required this.moves});
+  _MoveIndicatorPainter({required this.squareSize,  required this.piece, required this.move});
 
   void paint(Canvas canvas, Size size){
-    for(Move move in moves!){
-      if(move.moveType != null && move.moveType == MoveType.SIMPLE_MOVE){
-        final squareSize = size.shortestSide / 8;
-        Coordinate coord = piece!.position! + move.displacement!;
+      if(move!.moveType != null){
+        Coordinate coord = piece!.position! + move!.displacement!;
         DrawCoordinate drawCoord = DrawCoordinate(coord.xPos!, coord.yPos!);
         Offset centerCoord = Offset(
-          (drawCoord.xPos!) * squareSize + squareSize/2, 
-          (drawCoord.yPos!) * squareSize + squareSize/2);
-        double radius = squareSize/4;
+          (drawCoord.xPos!)  + squareSize!/2, 
+          (drawCoord.yPos!)  + squareSize!/2);
+        double radius = squareSize!/4;
         _paint.color = Colors.green;
         canvas.drawCircle(centerCoord , radius, _paint);
+      }
     }
-    }
-    
-  }
+  
 
 
   @override
