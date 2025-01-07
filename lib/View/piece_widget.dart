@@ -11,6 +11,7 @@ class PieceWidget extends StatelessWidget{
 
   @override
   Widget build (BuildContext context){
+    Widget piecePicture = getPiecePicture();
     return Positioned(
       top: squareSize * piece!.drawPosition!.yPos!,
       left: squareSize * piece!.drawPosition!.xPos!,
@@ -18,8 +19,31 @@ class PieceWidget extends StatelessWidget{
       width: squareSize,
       child: GestureDetector(
         onTap: () => onTap!(piece),
-        child: SvgPicture.asset('assets/images/chess_pieces/WHITE_CHESS_PAWN.svg')
+        child: piecePicture
       ),
     ); 
+  }
+
+  Widget getPiecePicture(){
+    String color;
+    if(piece!.color == ChessColor.LIGHT){
+      color = 'LIGHT';
+    }else{
+      color = 'DARK';
+    }
+    switch(piece!.type!){
+      case PieceType.PAWN:
+        return SvgPicture.asset('assets/images/chess_pieces/${color}_PAWN.svg');
+      case PieceType.KNIGHT:
+        return SvgPicture.asset('assets/images/chess_pieces/${color}_KNIGHT.svg');
+      case PieceType.ROOK:
+        return SvgPicture.asset('assets/images/chess_pieces/${color}_ROOK.svg');
+      case PieceType.BISHOP:
+        return SvgPicture.asset('assets/images/chess_pieces/${color}_BISHOP.svg');
+      case PieceType.QUEEN:
+        return SvgPicture.asset('assets/images/chess_pieces/${color}_QUEEN.svg');
+      case PieceType.KING:
+        return SvgPicture.asset('assets/images/chess_pieces/${color}_KING.svg');
+    }
   }
 }

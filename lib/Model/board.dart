@@ -20,5 +20,6 @@ class Board {
   Turn? turn;
 }
 
-List<Piece>? pieces = [Piece(type: Type.PAWN, position: Coordinate(3, 2))];
+List<Piece>? pieces = [Piece(color: ChessColor.LIGHT, type: PieceType.PAWN, position: Coordinate(3, 2)), 
+Piece(color: ChessColor.DARK, type: PieceType.KNIGHT, position: Coordinate(1, 2))];
 Board testBoard = Board(pieces: pieces);

@@ -1,56 +1,56 @@
 # ninja log v5
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/libflutter_linux_gtk.so	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	829d5e95f5adc76b
-3965	4453	1735829419986848932	runner/CMakeFiles/p2p_chess.dir/my_application.cc.o	1d295dd73b66767e
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	829d5e95f5adc76b
-4193	4906	1735215674089182262	runner/CMakeFiles/p2p_chess.dir/main.cc.o	80a6c5055e1a98a6
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_view.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_engine.h	829d5e95f5adc76b
-4593	4700	0	CMakeFiles/install.util	8ecf6fd19c0c68dd
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	829d5e95f5adc76b
-3966	4479	1735829420009849223	runner/CMakeFiles/p2p_chess.dir/__/flutter/generated_plugin_registrant.cc.o	b787bf4106695da7
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/flutter/_phony_	829d5e95f5adc76b
-4479	4592	1735829420125850689	intermediates_do_not_run/p2p_chess	f00af579046d55df
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	829d5e95f5adc76b
-12	3965	0	flutter/_phony_	829d5e95f5adc76b
-12	3965	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_value.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/libflutter_linux_gtk.so	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_engine.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_value.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_view.h	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	829d5e95f5adc76b
-4	4012	0	flutter/_phony_	829d5e95f5adc76b
-4	4012	0	/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/flutter/_phony_	829d5e95f5adc76b
-4013	4350	1735829451346091304	runner/CMakeFiles/p2p_chess.dir/__/flutter/generated_plugin_registrant.cc.o	b787bf4106695da7
-4012	4475	1735829451470092208	runner/CMakeFiles/p2p_chess.dir/my_application.cc.o	1d295dd73b66767e
-4475	4587	1735829451585093046	intermediates_do_not_run/p2p_chess	f00af579046d55df
-4587	4737	0	CMakeFiles/install.util	8ecf6fd19c0c68dd
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	6789d62eb415b644
+5515	5697	0	CMakeFiles/install.util	f2610c0b41019490
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	6789d62eb415b644
+4743	5320	1736281855330304753	runner/CMakeFiles/p2p_chess.dir/__/flutter/generated_plugin_registrant.cc.o	85bc0fffe27642e4
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_view.h	6789d62eb415b644
+4743	5304	1736281855314304461	runner/CMakeFiles/p2p_chess.dir/my_application.cc.o	1a473f2572017fad
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	6789d62eb415b644
+5320	5515	1736281855530308409	intermediates_do_not_run/p2p_chess	b9100a1021044b57
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_value.h	6789d62eb415b644
+11377	12535	1736281066502417673	runner/CMakeFiles/p2p_chess.dir/main.cc.o	7cfc8b7e783a4aa2
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_engine.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/build/linux/x64/debug/flutter/_phony_	6789d62eb415b644
+3	4742	0	flutter/_phony_	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/libflutter_linux_gtk.so	6789d62eb415b644
+3	4742	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/libflutter_linux_gtk.so	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_engine.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_value.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/fl_view.h	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	6789d62eb415b644
+2	4763	0	flutter/_phony_	6789d62eb415b644
+2	4763	0	/home/ie/Documents/Flutter Lucas/p2p_chess/build/linux/x64/debug/flutter/_phony_	6789d62eb415b644
+4763	5312	1736282035359583395	runner/CMakeFiles/p2p_chess.dir/__/flutter/generated_plugin_registrant.cc.o	85bc0fffe27642e4
+4763	5375	1736282035423584556	runner/CMakeFiles/p2p_chess.dir/my_application.cc.o	1a473f2572017fad
+5375	5569	1736282035622588169	intermediates_do_not_run/p2p_chess	b9100a1021044b57
+5569	5760	0	CMakeFiles/install.util	f2610c0b41019490

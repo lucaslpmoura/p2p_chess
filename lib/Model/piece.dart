@@ -7,7 +7,7 @@ Enumerates its type, moves, and color
 
 import 'package:p2p_chess/Model/coordinate.dart';
 
-enum Type{
+enum PieceType{
   PAWN,
   KNIGHT,
   ROOK,
@@ -16,9 +16,14 @@ enum Type{
   KING
 }
 
+enum ChessColor{
+  LIGHT,
+  DARK
+}
+
 class Piece {
-  Type? type;
-  bool? color; //true - light, false - dark
+  PieceType? type;
+  ChessColor? color;
   Set<Move>? _moves;
   Set<Move>? get moves => _moves;
 
@@ -33,7 +38,7 @@ class Piece {
 
   bool? isInPlay;
 
-  Piece({required this.type, required this.position}){
+  Piece({required this.color, required this.type, required this.position}){
     _generateMoves();
     updateDrawPosition();
   }
@@ -44,18 +49,18 @@ class Piece {
 
   void _generateMoves(){
     switch(type){
-      case Type.PAWN:
+      case PieceType.PAWN:
         _moves = {
           Move(displacement: Coordinate(0,1), moveType: MoveType.SIMPLE_MOVE),
           Move(displacement: Coordinate(1,1), moveType: MoveType.CAPTURE),
           Move(displacement: Coordinate(-1,1), moveType: MoveType.CAPTURE),
         };
         break;
-      case Type.KNIGHT:
-      case Type.ROOK:
-      case Type.BISHOP:
-      case Type.QUEEN:
-      case Type.KING:
+      case PieceType.KNIGHT:
+      case PieceType.ROOK:
+      case PieceType.BISHOP:
+      case PieceType.QUEEN:
+      case PieceType.KING:
 
       default:
         break;
