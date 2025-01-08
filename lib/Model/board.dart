@@ -15,9 +15,14 @@ enum Turn{
 }
 
 class Board {
-  Board({required this.pieces});
-  List<Piece>? pieces;
+  Board();
+  List<Piece>? _pieces;
   Turn? turn;
+
+  List<Piece> get pieces => _pieces == null ? [] : _pieces!;
+  void setPieceList(List<Piece>? pieces){
+    _pieces = pieces;
+  }
 }
 
 List<Piece>? pieces = [
@@ -28,4 +33,4 @@ List<Piece>? pieces = [
   Queen(color: ChessColor.DARK, position: Coordinate(1, 1)),
   King(color: ChessColor.LIGHT, position: Coordinate(3,3))
 ];
-Board testBoard = Board(pieces: pieces);
+Board testBoard = Board()..setPieceList(pieces);

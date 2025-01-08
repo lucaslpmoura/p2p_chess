@@ -46,7 +46,7 @@ class _ChessboardState extends State<Chessboard> {
     setState(() {
       if(selectedPiece == null){
         selectedPiece = piece;
-        _currentMoves = gameController.getPieceMoves(piece);
+        _currentMoves = gameController.getValidPieceMoves(piece, testBoard);
       }else{
         if(piece == selectedPiece){
           selectedPiece = null;
@@ -67,7 +67,7 @@ class _ChessboardState extends State<Chessboard> {
 
   List<Widget> getAllPiecesWidgets(Board board, Size size){
     List<Widget> piecesWidgets = [];
-    for (Piece piece in board.pieces!){
+    for (Piece piece in board.pieces){
       piecesWidgets.add(PieceWidget(squareSize: squareSize, piece: piece, onTap: getPieceMoves));
     }
     return piecesWidgets;

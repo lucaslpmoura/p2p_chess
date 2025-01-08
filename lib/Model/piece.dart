@@ -25,7 +25,6 @@ class Piece {
   PieceType? type;
   ChessColor? color;
   Set<Move>? _moves;
-  Set<Move>? get moves => _moves;
 
   Coordinate? initialPosition;
   Coordinate? position;
@@ -37,6 +36,8 @@ class Piece {
   DrawCoordinate? drawPosition;
 
   bool? isInPlay;
+
+  Set<Move> get moves => _moves == null ? {} : _moves!;
 
   Piece({required this.color, required this.type, required this.position}){
     _generateMoves();
