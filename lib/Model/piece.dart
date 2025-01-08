@@ -49,25 +49,12 @@ class Piece {
   }
 
   void _generateMoves(){
-    switch(type){
-      case PieceType.PAWN:
-        _moves = {
-          Move(displacement: Coordinate(0,1), moveType: MoveType.SIMPLE_MOVE),
-          Move(displacement: Coordinate(1,1), moveType: MoveType.CAPTURE),
-          Move(displacement: Coordinate(-1,1), moveType: MoveType.CAPTURE),
-        };
-        break;
-      case PieceType.KNIGHT:
-      case PieceType.ROOK:
-      case PieceType.BISHOP:
-      case PieceType.QUEEN:
-      case PieceType.KING:
-
-      default:
-        break;
-    }
   }
 
+  @override
+  bool operator == (covariant Piece piece){
+    return (piece.type == this.type && piece.position == this.position && piece.color == this.color);
+  }
 }
 class Pawn extends Piece{
   Pawn({color, position}) : super(color: color, type: PieceType.PAWN, position: position){
@@ -78,9 +65,9 @@ class Pawn extends Piece{
   @override
   void _generateMoves(){
     _moves = {
-          Move(displacement: Coordinate(0,1), moveType: MoveType.SIMPLE_MOVE),
-          Move(displacement: Coordinate(1,1), moveType: MoveType.CAPTURE),
-          Move(displacement: Coordinate(-1,1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(0,1), moveType: MoveType.PAWN_MOVE),
+          Move(displacement: Coordinate(1,1), moveType: MoveType.PAWN_CAPTURE),
+          Move(displacement: Coordinate(-1,1), moveType: MoveType.PAWN_CAPTURE),
     };
   }
 }
@@ -93,14 +80,14 @@ class Knight extends Piece{
   @override
   void _generateMoves(){
     _moves = {
-          Move(displacement: Coordinate(2,1), moveType: MoveType.CAPTURE),
-          Move(displacement: Coordinate(2,-1), moveType: MoveType.CAPTURE),
-          Move(displacement: Coordinate(-2,1), moveType: MoveType.CAPTURE),
-          Move(displacement: Coordinate(-2,-1), moveType: MoveType.CAPTURE),
-          Move(displacement: Coordinate(1,2), moveType: MoveType.CAPTURE),
-          Move(displacement: Coordinate(1,-2), moveType: MoveType.CAPTURE),
-          Move(displacement: Coordinate(-1,2), moveType: MoveType.CAPTURE),
-          Move(displacement: Coordinate(-1,-2), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(2,1), moveType: MoveType.MOVE),
+          Move(displacement: Coordinate(2,-1), moveType: MoveType.MOVE),
+          Move(displacement: Coordinate(-2,1), moveType: MoveType.MOVE),
+          Move(displacement: Coordinate(-2,-1), moveType: MoveType.MOVE),
+          Move(displacement: Coordinate(1,2), moveType: MoveType.MOVE),
+          Move(displacement: Coordinate(1,-2), moveType: MoveType.MOVE),
+          Move(displacement: Coordinate(-1,2), moveType: MoveType.MOVE),
+          Move(displacement: Coordinate(-1,-2), moveType: MoveType.MOVE),
     };
   }
 }
@@ -115,10 +102,10 @@ class Bishop extends Piece{
   void _generateMoves(){
     _moves = {};
     for(int i = 1; i <= 7; i++){
-      _moves!.add(Move(displacement: Coordinate(i, i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(i, i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.MOVE));
     }
   }
 }
@@ -133,10 +120,10 @@ class Rook extends Piece{
   void _generateMoves(){
     _moves = {};
     for(int i = 1; i <= 7; i++){
-      _moves!.add(Move(displacement: Coordinate(0, i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(0, i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.MOVE));
     }
   }
 }
@@ -151,14 +138,14 @@ class Queen extends Piece{
   void _generateMoves(){
     _moves = {};
     for(int i = 1; i <= 7; i++){
-      _moves!.add(Move(displacement: Coordinate(0, i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(i, i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(0, i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(i, i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.MOVE));
     }
   }
 }
@@ -173,14 +160,14 @@ class King extends Piece{
   void _generateMoves(){
     _moves = {};
     for(int i = 1; i <= 1; i++){
-      _moves!.add(Move(displacement: Coordinate(0, i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(i, i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.CAPTURE));
-      _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(0, i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(i, i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.MOVE));
     }
   }
 }
@@ -189,8 +176,19 @@ class King extends Piece{
 
 
 enum MoveType {
-  SIMPLE_MOVE,
-  CAPTURE
+  MOVE,
+
+  PAWN_MOVE,
+  PAWN_FIRST_MOVE,
+  PAWN_CAPTURE,
+  PAWN_PROMOTION,
+  PAWN_EN_PASSANT,
+
+  KNIGHT_MOVE,
+
+  KING_CASTLE,
+
+
 }
 
 class Move{
