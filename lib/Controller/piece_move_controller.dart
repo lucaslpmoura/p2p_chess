@@ -9,7 +9,6 @@ mixin PieceMoveController {
   }
 
   void movePiece(Piece piece, Move move){
-
     piece.position = piece.position! + move.displacement!;
     piece.updateDrawPosition();
   }

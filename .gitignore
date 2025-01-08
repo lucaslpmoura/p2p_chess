@@ -1,39 +1,64 @@
-# Flutter/Dart/Pub related
+# Flutter
 .dart_tool/
-.build/
-packages/
-
-# Android related
-*.apk
-*.apks
-*.aab
+.flutter-plugins
+.flutter-plugins-dependencies
+.package
+.macos/
 .idea/
-.gradle/
-local.properties
 *.iml
+*.ipr
+*.iws
 
-# iOS related
-*.xcuserstate
-ios/Flutter/Flutter.podspec
+# Generated files
+build/
+flutter_export_environment.sh
+flutter_export_environment.bat
+*.log
+pubspec.lock
+build/linux
+
+# iOS specific
 ios/Pods/
-ios/Podfile.lock
 ios/.symlinks/
-xcuserdata/
+ios/Flutter/Flutter.framework/
+ios/Flutter/Flutter.podspec
+ios/Flutter/App.framework
+ios/Flutter/Flutter.xcframework/
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata/
+
+# Android specific
+android/.gradle/
+android/app/app.iml
+android/app/*.keystore
+android/local.properties
+android/build/
+android/.idea/
+android/captures/
+android/gradle.properties
+android/*.iml
+android/.gradle/
+android/.settings/
+
+# Web specific
+web/.dart_tool/
+web/.firebase/
+web/.flutter-plugins/
 
 # VS Code
 .vscode/
 
-# IntelliJ
+# Intellij
+*.iml
+*.ipr
+*.iws
+
+# JetBrains IDEs
 .idea/
+*.iml
+.gradle/
 
-# Build generated
-*.log
-*.class
-*.apk
-*.dSYM/
-
-# MacOS related
+# Miscellaneous
 .DS_Store
-
-# Linux related
-*~
+Thumbs.db
