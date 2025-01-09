@@ -36,12 +36,14 @@ class Piece {
   DrawCoordinate? drawPosition;
 
   bool? isInPlay;
+  bool? hasMoved;
 
   Set<Move> get moves => _moves == null ? {} : _moves!;
 
   Piece({required this.color, required this.type, required this.position}){
     _generateMoves();
     updateDrawPosition();
+    hasMoved = false;
   }
 
   void updateDrawPosition(){
@@ -65,9 +67,10 @@ class Pawn extends Piece{
   @override
   void _generateMoves(){
     _moves = {
-          Move(displacement: Coordinate(0,1), moveType: MoveType.PAWN_MOVE),
-          Move(displacement: Coordinate(1,1), moveType: MoveType.PAWN_CAPTURE),
-          Move(displacement: Coordinate(-1,1), moveType: MoveType.PAWN_CAPTURE),
+          Move(displacement:  Coordinate(0, 2), moveType: MoveType.PAWN_FIRST_MOVE),
+          Move(displacement: Coordinate(0,1), moveType: MoveType.MOVE),
+          Move(displacement: Coordinate(1,1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(-1,1), moveType: MoveType.CAPTURE),
     };
   }
 }
@@ -88,6 +91,15 @@ class Knight extends Piece{
           Move(displacement: Coordinate(1,-2), moveType: MoveType.MOVE),
           Move(displacement: Coordinate(-1,2), moveType: MoveType.MOVE),
           Move(displacement: Coordinate(-1,-2), moveType: MoveType.MOVE),
+
+          Move(displacement: Coordinate(2,1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(2,-1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(-2,1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(-2,-1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(1,2), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(1,-2), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(-1,2), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(-1,-2), moveType: MoveType.CAPTURE),
     };
   }
 }
@@ -107,6 +119,12 @@ class Bishop extends Piece{
       _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.MOVE));
       _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.MOVE));
     }
+    for(int i = 1; i <= 7; i++){
+      _moves!.add(Move(displacement: Coordinate(i, i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.CAPTURE));
+    }
   }
 }
 
@@ -124,6 +142,12 @@ class Rook extends Piece{
       _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.MOVE));
       _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.MOVE));
       _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.MOVE));
+    }
+    for(int i = 1; i <= 7; i++){
+      _moves!.add(Move(displacement: Coordinate(0, i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.CAPTURE));
     }
   }
 }
@@ -147,6 +171,16 @@ class Queen extends Piece{
       _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.MOVE));
       _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.MOVE));
     }
+    for(int i = 1; i <= 7; i++){
+      _moves!.add(Move(displacement: Coordinate(0, i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(i, i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.CAPTURE));
+    }
   }
 }
 
@@ -168,6 +202,14 @@ class King extends Piece{
       _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.MOVE));
       _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.MOVE));
       _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.MOVE));
+      _moves!.add(Move(displacement: Coordinate(0, i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(0, -i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(-i, 0), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(i, i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(i, -i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.CAPTURE));
+      _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.CAPTURE));
     }
   }
 }
@@ -177,15 +219,18 @@ class King extends Piece{
 
 enum MoveType {
   MOVE,
+  CAPTURE,
 
-  PAWN_MOVE,
   PAWN_FIRST_MOVE,
-  PAWN_CAPTURE,
   PAWN_PROMOTION,
   PAWN_EN_PASSANT,
 
+  /*
+  Might not be necessary. Further testing needed.
+  
   KNIGHT_MOVE,
-
+  KNIGHT_CAPTURE,
+  */
   KING_CASTLE,
 
 

@@ -28,33 +28,41 @@ mixin PieceMoveController {
   Set<Move>? getValidPieceMoves(Piece piece, Board board){
     Set<Move> allMoves = getPieceMoves(piece)!;
     Set<Move> validMoves = {};
+
+    
     for(Move move in allMoves){
+      Coordinate futurePos = (piece.position! + move.displacement!);
       switch(move.moveType!){
-        
         case MoveType.MOVE:
           if(
-            !_isTherePieceBlockingTheWay(piece, move, board)
+            !_isTherePieceBlockingTheWay(piece, move, board) &&
+            !_isTherePieceInFuturePos(piece, futurePos, board)
           ){
             validMoves.add(move);
           }
           break;
-        case MoveType.PAWN_MOVE:
-          // TODO: Handle PAWN_MOVE.
-          throw UnimplementedError();
+        case MoveType.CAPTURE:
+          if(
+            !_isTherePieceBlockingTheWay(piece, move, board) &&
+            _isThereEnemyPieceInFuturePos(piece, move, board)
+          ){
+            validMoves.add(move);
+          }
+          break;
         case MoveType.PAWN_FIRST_MOVE:
-          // TODO: Handle PAWN_FIRST_MOVE.
-          throw UnimplementedError();
-        case MoveType.PAWN_CAPTURE:
-          // TODO: Handle PAWN_CAPTURE.
-          throw UnimplementedError();
+          if(
+            !piece.hasMoved! &&
+            !_isTherePieceBlockingTheWay(piece, move, board) &&
+            !_isTherePieceInFuturePos(piece, futurePos, board)
+          ){
+            validMoves.add(move);
+          }
+          break;
         case MoveType.PAWN_PROMOTION:
           // TODO: Handle PAWN_PROMOTION.
           throw UnimplementedError();
         case MoveType.PAWN_EN_PASSANT:
           // TODO: Handle PAWN_EN_PASSANT.
-          throw UnimplementedError();
-        case MoveType.KNIGHT_MOVE:
-          // TODO: Handle KNIGHT_MOVE.
           throw UnimplementedError();
         case MoveType.KING_CASTLE:
           // TODO: Handle KING_CASTLE.
@@ -66,6 +74,7 @@ mixin PieceMoveController {
 
   void movePiece(Piece piece, Move move){
     piece.position = piece.position! + move.displacement!;
+    piece.hasMoved = true;
     piece.updateDrawPosition();
   }
 
@@ -76,6 +85,15 @@ mixin PieceMoveController {
   bool _isThereEnemyPieceInFuturePos(Piece piece, Move move, Board board){
     for(Piece otherPiece in board.pieces){
       if((otherPiece.position! == (piece.position! + move.displacement!)) && (otherPiece.color! != piece.color!)){ 
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool _isThereFriendlyPieceInFuturePos(Piece piece, Coordinate coord, Board board){
+    for(Piece otherPiece in board.pieces){
+      if((otherPiece.position! == coord) && (otherPiece.color! == piece.color!)){ 
         return true;
       }
     }
@@ -158,7 +176,7 @@ mixin PieceMoveController {
     The piece future position needs to be removed so that capture moves are only blocked
     by the first piece that encourters
     */
-    transientPositions.remove(getPieceFuturePostion(piece, move));
+    (transientPositions.removeWhere( (element) => element == getPieceFuturePostion(piece, move)));
 
     /*
     1-step move

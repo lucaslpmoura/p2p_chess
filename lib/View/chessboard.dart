@@ -47,6 +47,14 @@ class _ChessboardState extends State<Chessboard> {
       if(selectedPiece == null){
         selectedPiece = piece;
         _currentMoves = gameController.getValidPieceMoves(piece, testBoard);
+
+        /*
+        Comodidity check for the user: if the piece has no avaiable moves,
+        it simply isnt selected
+        */
+        if(_currentMoves!.isEmpty){
+          selectedPiece = null;
+        }
       }else{
         if(piece == selectedPiece){
           selectedPiece = null;
