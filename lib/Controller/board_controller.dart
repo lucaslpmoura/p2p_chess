@@ -16,4 +16,7 @@ mixin BoardController on GameControllerInterface{
       return;
     }
   }
+
+  void addMoveToHistory(Piece piece, Move move){
+  }
 }

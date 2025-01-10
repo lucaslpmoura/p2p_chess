@@ -20,6 +20,9 @@ class Board {
 
   ChessColor turn = ChessColor.LIGHT;
 
+  List<Move> lightMoves = [];
+  List<Move> darkMoves = [];
+
   List<Piece> get pieces => _pieces == null ? [] : _pieces!;
   void setPieceList(List<Piece>? pieces){
     _pieces = pieces;
@@ -71,12 +74,12 @@ class Board {
     _pieces!.add(Rook(color: ChessColor.DARK, position: Coordinate(7,7)));
 
     //Queens
-    _pieces!.add(Queen(color: ChessColor.LIGHT, position: Coordinate(4,0)));
-    _pieces!.add(Queen(color: ChessColor.DARK, position: Coordinate(4,7)));
+    _pieces!.add(Queen(color: ChessColor.LIGHT, position: Coordinate(3,0)));
+    _pieces!.add(Queen(color: ChessColor.DARK, position: Coordinate(3,7)));
 
     //Kings
-    lightKing = King(color: ChessColor.LIGHT, position: Coordinate(3,0));
-    darkKing = King(color: ChessColor.DARK, position: Coordinate(3,7));
+    lightKing = King(color: ChessColor.LIGHT, position: Coordinate(4,0));
+    darkKing = King(color: ChessColor.DARK, position: Coordinate(4,7));
 
     _pieces!.add(lightKing!);
     _pieces!.add(darkKing!);
@@ -95,3 +98,11 @@ List<Piece>? pieces = [
 
 Board testBoard = Board()..setPieceList(pieces);
 Board defaultBoard = Board()..generateDefaultPieces();
+
+class MoveAnnotation{
+  int? number;
+  Piece piece;
+  Move move;
+
+  MoveAnnotation({required this.number, required this.piece, required this.move});
+}
