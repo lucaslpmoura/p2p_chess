@@ -9,10 +9,6 @@ TODO: Number of moves, history of moves
 import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
 
-enum Turn{
-  LIGHT,
-  DARK,
-}
 
 class Board {
   Board();
@@ -22,7 +18,7 @@ class Board {
   King? lightKing;
   King? darkKing;
 
-  Turn? turn;
+  ChessColor turn = ChessColor.LIGHT;
 
   List<Piece> get pieces => _pieces == null ? [] : _pieces!;
   void setPieceList(List<Piece>? pieces){

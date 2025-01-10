@@ -83,6 +83,9 @@ mixin PieceMoveController on GameControllerInterface{
     piece.position = piece.position! + move.displacement!;
     piece.hasMoved = true;
     piece.updateDrawPosition();
+
+    //There must be a better way to do this
+    (this as GameController).changePlayerTurn();
   }
 
 
