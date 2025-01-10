@@ -1,10 +1,11 @@
 import 'dart:developer';
 
-import 'package:p2p_chess/Model/board.dart';
+import 'package:p2p_chess/Controller/game_controller.dart';
 import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
 
-mixin PieceMoveController {
+mixin PieceMoveController on GameControllerInterface{
+
 
   Set<Move>? getPieceMoves(Piece piece){
     Set<Move>? moveList= {};
@@ -25,7 +26,7 @@ mixin PieceMoveController {
 
   Special case: en passant, castle
   */
-  Set<Move>? getValidPieceMoves(Piece piece, Board board){
+  Set<Move>? getValidPieceMoves(Piece piece){
     Set<Move> allMoves = getPieceMoves(piece)!;
     Set<Move> validMoves = {};
 
@@ -35,16 +36,16 @@ mixin PieceMoveController {
       switch(move.moveType!){
         case MoveType.MOVE:
           if(
-            !_isTherePieceBlockingTheWay(piece, move, board) &&
-            !_isTherePieceInFuturePos(piece, futurePos, board)
+            !_isTherePieceBlockingTheWay(piece, move) &&
+            !_isTherePieceInFuturePos(piece, futurePos)
           ){
             validMoves.add(move);
           }
           break;
         case MoveType.CAPTURE:
           if(
-            !_isTherePieceBlockingTheWay(piece, move, board) &&
-            _isThereEnemyPieceInFuturePos(piece, move, board)
+            !_isTherePieceBlockingTheWay(piece, move) &&
+            _isThereEnemyPieceInFuturePos(piece, move)
           ){
             validMoves.add(move);
           }
@@ -52,8 +53,8 @@ mixin PieceMoveController {
         case MoveType.PAWN_FIRST_MOVE:
           if(
             !piece.hasMoved! &&
-            !_isTherePieceBlockingTheWay(piece, move, board) &&
-            !_isTherePieceInFuturePos(piece, futurePos, board)
+            !_isTherePieceBlockingTheWay(piece, move) &&
+            !_isTherePieceInFuturePos(piece, futurePos)
           ){
             validMoves.add(move);
           }
@@ -73,17 +74,32 @@ mixin PieceMoveController {
   }
 
   void movePiece(Piece piece, Move move){
+    if(move.moveType == MoveType.CAPTURE){
+      capturePiece(piece, move);
+    }
     piece.position = piece.position! + move.displacement!;
     piece.hasMoved = true;
     piece.updateDrawPosition();
   }
 
+  void capturePiece(Piece capturerPiece, Move move){
+    for(Piece capturedPiece in board!.pieces){
+      if(capturedPiece.position! == getPieceFuturePostion(capturerPiece, move)){
+        //TODO: Board controller
+        board!.capturedPieces.add(capturedPiece);
+        board!.pieces.removeWhere((piece) => piece.position! == getPieceFuturePostion(capturerPiece, move));
+        return;
+      }
+    }
+  }
+
+
   Coordinate getPieceFuturePostion(Piece piece, Move move){
     return (piece.position! + move.displacement!);
   }
 
-  bool _isThereEnemyPieceInFuturePos(Piece piece, Move move, Board board){
-    for(Piece otherPiece in board.pieces){
+  bool _isThereEnemyPieceInFuturePos(Piece piece, Move move){
+    for(Piece otherPiece in board!.pieces){
       if((otherPiece.position! == (piece.position! + move.displacement!)) && (otherPiece.color! != piece.color!)){ 
         return true;
       }
@@ -91,8 +107,8 @@ mixin PieceMoveController {
     return false;
   }
 
-  bool _isThereFriendlyPieceInFuturePos(Piece piece, Coordinate coord, Board board){
-    for(Piece otherPiece in board.pieces){
+  bool _isThereFriendlyPieceInFuturePos(Piece piece, Coordinate coord){
+    for(Piece otherPiece in board!.pieces){
       if((otherPiece.position! == coord) && (otherPiece.color! == piece.color!)){ 
         return true;
       }
@@ -100,8 +116,8 @@ mixin PieceMoveController {
     return false;
   }
 
-  bool _isTherePieceInFuturePos(Piece piece, Coordinate coord, Board board){
-    for(Piece otherPiece in board.pieces){
+  bool _isTherePieceInFuturePos(Piece piece, Coordinate coord){
+    for(Piece otherPiece in board!.pieces){
       if((otherPiece.position! == coord) && otherPiece != piece){ 
         return true;
       }
@@ -110,7 +126,7 @@ mixin PieceMoveController {
   }
 
   //Got it from my old c++ project
-  bool _isTherePieceBlockingTheWay(Piece piece, Move move, Board board){
+  bool _isTherePieceBlockingTheWay(Piece piece, Move move){
     Set<Coordinate> transientPositions = {};
 
     int pieceXPos = piece.position!.xPos!;
@@ -187,7 +203,7 @@ mixin PieceMoveController {
     }
 
     for(var pos in transientPositions){
-      if(_isTherePieceInFuturePos(piece, pos, board)){
+      if(_isTherePieceInFuturePos(piece, pos)){
         return true;
       }
     }

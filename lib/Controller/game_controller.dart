@@ -1,5 +1,12 @@
 import 'package:p2p_chess/Controller/piece_move_controller.dart';
+import 'package:p2p_chess/Model/board.dart';
+import 'package:p2p_chess/Model/piece.dart';
 
-class GameController with PieceMoveController{
-  
+interface class GameControllerInterface{
+  Board? board;
+  GameControllerInterface({required this.board});
+}
+
+class GameController extends GameControllerInterface with PieceMoveController{
+  GameController({required super.board}); 
 }

@@ -10,13 +10,18 @@ import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
 
 enum Turn{
-  BLACK,
-  WHITE,
+  LIGHT,
+  DARK,
 }
 
 class Board {
   Board();
   List<Piece>? _pieces;
+  List<Piece> capturedPieces = [];
+
+  King? lightKing;
+  King? darkKing;
+
   Turn? turn;
 
   List<Piece> get pieces => _pieces == null ? [] : _pieces!;
@@ -56,8 +61,11 @@ class Board {
     _pieces!.add(Queen(color: ChessColor.DARK, position: Coordinate(4,7)));
 
     //Kings
-    _pieces!.add(King(color: ChessColor.LIGHT, position: Coordinate(3,0)));
-    _pieces!.add(King(color: ChessColor.DARK, position: Coordinate(3,7)));
+    lightKing = King(color: ChessColor.LIGHT, position: Coordinate(3,0));
+    darkKing = King(color: ChessColor.DARK, position: Coordinate(3,7));
+
+    _pieces!.add(lightKing!);
+    _pieces!.add(darkKing!);
   }
 }
 

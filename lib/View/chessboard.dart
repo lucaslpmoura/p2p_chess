@@ -20,7 +20,7 @@ class Chessboard extends StatefulWidget{
 class _ChessboardState extends State<Chessboard> {
 
   double squareSize = 0;
-  GameController gameController = GameController();
+  GameController gameController = GameController(board: defaultBoard);
   Set<Move>? _currentMoves;
   Piece? selectedPiece;
   List<Widget>? movesWidgets;
@@ -46,7 +46,7 @@ class _ChessboardState extends State<Chessboard> {
     setState(() {
       if(selectedPiece == null){
         selectedPiece = piece;
-        _currentMoves = gameController.getValidPieceMoves(piece, defaultBoard);
+        _currentMoves = gameController.getValidPieceMoves(piece);
 
         /*
         Comodidity check for the user: if the piece has no avaiable moves,
