@@ -37,7 +37,8 @@ mixin PieceMoveController on GameControllerInterface{
         case MoveType.MOVE:
           if(
             !_isTherePieceBlockingTheWay(piece, move) &&
-            !_isTherePieceInFuturePos(piece, futurePos)
+            !_isTherePieceInFuturePos(piece, futurePos) &&
+            !_wiilTheKingBeInCheck(piece, move)
           ){
             validMoves.add(move);
           }
@@ -45,7 +46,8 @@ mixin PieceMoveController on GameControllerInterface{
         case MoveType.CAPTURE:
           if(
             !_isTherePieceBlockingTheWay(piece, move) &&
-            _isThereEnemyPieceInFuturePos(piece, move)
+            _isThereEnemyPieceInFuturePos(piece, move) &&
+            !_wiilTheKingBeInCheck(piece, move)
           ){
             validMoves.add(move);
           }
@@ -54,7 +56,8 @@ mixin PieceMoveController on GameControllerInterface{
           if(
             !piece.hasMoved! &&
             !_isTherePieceBlockingTheWay(piece, move) &&
-            !_isTherePieceInFuturePos(piece, futurePos)
+            !_isTherePieceInFuturePos(piece, futurePos) &&
+            !_wiilTheKingBeInCheck(piece, move)
           ){
             validMoves.add(move);
           }
@@ -82,15 +85,46 @@ mixin PieceMoveController on GameControllerInterface{
     piece.updateDrawPosition();
   }
 
-  void capturePiece(Piece capturerPiece, Move move){
+
+  /*
+  Simulates a piece move and returns the captured piece
+  null = no captured piece
+
+  Using for checking if the move would put the king in check
+  */
+  Piece? simulateMove(Piece piece, Move move){
+    Piece? capturedPiece;
+    if(move.moveType == MoveType.CAPTURE){
+      capturedPiece = capturePiece(piece, move);
+    }
+
+    piece.position = piece.position! + move.displacement!;
+    piece.updateDrawPosition();
+
+    return capturedPiece;
+  }
+
+  void undoMove(Piece piece, Move move, Piece? removedPiece){
+    simulateMove(piece, move.getOpositeMove());
+    
+    if(removedPiece != null){
+      //TODO: Board Controller
+      board!.pieces.add(removedPiece);
+    }
+  }
+
+
+  Piece? capturePiece(Piece capturerPiece, Move move){
     for(Piece capturedPiece in board!.pieces){
       if(capturedPiece.position! == getPieceFuturePostion(capturerPiece, move)){
+        Piece? capturedPieceCopy = capturedPiece;
         //TODO: Board controller
         board!.capturedPieces.add(capturedPiece);
         board!.pieces.removeWhere((piece) => piece.position! == getPieceFuturePostion(capturerPiece, move));
-        return;
+        return capturedPieceCopy;
       }
     }
+    return null;
   }
 
 
@@ -210,5 +244,68 @@ mixin PieceMoveController on GameControllerInterface{
 
 
     return false;
+  }
+
+  bool _wiilTheKingBeInCheck(Piece piece, Move move){
+      bool? validMove;
+
+      Piece? removedPiece = simulateMove(piece, move);
+
+      _isKingInCheck(piece.color!) ? validMove = false : validMove = true;
+
+      undoMove(piece, move, removedPiece);
+      _isKingInCheck(piece.color!);
+
+
+    /*Need to negate it to make sense with the question structure of the functions
+    eg. Will the king be in check? Yes, then the move would be invalid (false)
+    */
+      return !validMove;
+  }
+
+  //TODO: Board Controller
+
+  /*
+  For each enemy piece:
+  1 - Gets all its capturing moves
+  2 - Checks if they are valid
+  3 - See if one of them puts the king in check
+
+  This is necessary because using getValidPieceMoves() to check the validity of the moves
+  would result in an infinite recursion.
+  */
+  bool _isKingInCheck(ChessColor color){
+    var enemyPieces = board!.pieces.where((piece) => piece.color! != color);
+    King king = board!.getKing(color);
+
+    for(Piece piece in enemyPieces){
+      Set<Move> captureMoves = {};
+      for(Move move in getPieceMoves(piece)!){
+        if(move.moveType == MoveType.CAPTURE){
+          captureMoves.add(move);
+        }
+      }
+
+      Set<Move> validCaptureMoves = {};
+      for(Move captureMove in captureMoves){
+        if(
+          (_isThereEnemyPieceInFuturePos(piece, captureMove) &&
+          !_isTherePieceBlockingTheWay(piece, captureMove))
+          ){
+            validCaptureMoves.add(captureMove);
+          }
+      }
+
+      for(Move validCaptureMove in validCaptureMoves){
+        if(getPieceFuturePostion(piece, validCaptureMove) == king.position){
+          king.isInCheck = true;
+          return king.isInCheck;
+        }
+      }
+    }
+
+    king.isInCheck = false;
+
+    return king.isInCheck;
   }
 }

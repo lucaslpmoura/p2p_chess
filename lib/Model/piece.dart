@@ -196,6 +196,8 @@ class Queen extends Piece{
 }
 
 class King extends Piece{
+  bool isInCheck = false;
+
   King({color, position}) : super(color: color, type: PieceType.KING, position: position){
     _generateMoves();
     updateDrawPosition();
@@ -255,10 +257,19 @@ class Move{
   Coordinate? displacement;
   MoveType? moveType;
 
-  Move({required this.displacement, required this.moveType}); 
+  Move({required this.displacement, required this.moveType});
+
+  //Creates a move that undo the one passed in the argumet
+  // ignore: non_constant_identifier_names
+  Move getOpositeMove(){
+    Coordinate newDisplacement = Coordinate(displacement!.xPos! * (-1), displacement!.yPos! *(-1));
+    return Move(displacement: newDisplacement, moveType: moveType);
+  }
 
   Coordinate getMoveAbsoluteCoordinate(Piece piece){
     return piece.position! + this.displacement!;
   }
+
+
 }
 

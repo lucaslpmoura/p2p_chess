@@ -29,6 +29,24 @@ class Board {
     _pieces = pieces;
   }
 
+  King getKing(ChessColor color){
+    switch(color){
+      case ChessColor.DARK:
+        return darkKing!;
+      case ChessColor.LIGHT:
+        return lightKing!;
+    }
+  }
+
+  bool isKingInCheck(ChessColor color){
+    switch(color){
+      case ChessColor.DARK:
+        return darkKing!.isInCheck;
+      case ChessColor.LIGHT:
+        return lightKing!.isInCheck;
+    }
+  } 
+
   void generateDefaultPieces() {
     _pieces = [];
 
