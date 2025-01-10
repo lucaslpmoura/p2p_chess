@@ -28,7 +28,7 @@ class _ChessboardState extends State<Chessboard> {
   @override
   Widget build(BuildContext context) {
     squareSize = MediaQuery.of(context).size.shortestSide / 8;
-    var piecesWidgets = getAllPiecesWidgets(testBoard, MediaQuery.of(context).size);
+    var piecesWidgets = getAllPiecesWidgets(defaultBoard, MediaQuery.of(context).size);
     movesWidgets = drawPieceMoves(_currentMoves);
 
     List<Widget> drawObjects = [];
@@ -46,7 +46,7 @@ class _ChessboardState extends State<Chessboard> {
     setState(() {
       if(selectedPiece == null){
         selectedPiece = piece;
-        _currentMoves = gameController.getValidPieceMoves(piece, testBoard);
+        _currentMoves = gameController.getValidPieceMoves(piece, defaultBoard);
 
         /*
         Comodidity check for the user: if the piece has no avaiable moves,

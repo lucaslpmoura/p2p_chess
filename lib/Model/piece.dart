@@ -59,19 +59,30 @@ class Piece {
   }
 }
 class Pawn extends Piece{
-  Pawn({color, position}) : super(color: color, type: PieceType.PAWN, position: position){
+  bool isInverted;
+  Pawn({ChessColor? color, Coordinate? position, bool this.isInverted = false}) : super(color: color, type: PieceType.PAWN, position: position){
     _generateMoves();
     updateDrawPosition();
   }
 
   @override
   void _generateMoves(){
-    _moves = {
+    if(!isInverted!){
+      _moves = {
           Move(displacement:  Coordinate(0, 2), moveType: MoveType.PAWN_FIRST_MOVE),
           Move(displacement: Coordinate(0,1), moveType: MoveType.MOVE),
           Move(displacement: Coordinate(1,1), moveType: MoveType.CAPTURE),
           Move(displacement: Coordinate(-1,1), moveType: MoveType.CAPTURE),
-    };
+      };
+    }else{
+      _moves = {
+          Move(displacement:  Coordinate(0, -2), moveType: MoveType.PAWN_FIRST_MOVE),
+          Move(displacement: Coordinate(0,-1), moveType: MoveType.MOVE),
+          Move(displacement: Coordinate(-1,-1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(1,-1), moveType: MoveType.CAPTURE),
+      };
+    }
+    
   }
 }
 class Knight extends Piece{
