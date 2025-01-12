@@ -75,8 +75,14 @@ mixin PieceMoveController on GameControllerInterface{
             validMoves.add(move);
           }
         case MoveType.KING_CASTLE:
-          // TODO: Handle KING_CASTLE.
-          throw UnimplementedError();
+          if(
+            _isCastlingValid(piece as King, move) &&
+            !_isTherePieceBlockingTheWay(piece, move) &&
+            !_isKingInCheck(piece.color!) &&
+            !_wiilTheKingBeInCheck(piece, move)
+          ) {
+            validMoves.add(move);
+          }
       }
     }
     return validMoves;
@@ -89,6 +95,21 @@ mixin PieceMoveController on GameControllerInterface{
     piece.position = piece.position! + move.displacement!;
     piece.hasMoved = true;
     piece.updateDrawPosition();
+
+    if(move.moveType == MoveType.KING_CASTLE){
+      Rook rook = _getCastleRook(piece as King, move)!;
+      for(Piece piece in board!.pieces ){
+        if(piece.hashCode == rook.hashCode){
+          print('aha!');
+        }
+      }
+
+      if(rook.position!.xPos! > piece.position!.xPos!){
+        rook.position = Coordinate(piece.position!.xPos! - 1, rook.position!.yPos!);
+        rook.hasMoved = true;
+        rook.updateDrawPosition();
+      }
+    }
 
     //There must be a better way to do this
     (this as GameController).changePlayerTurn();
@@ -341,5 +362,60 @@ mixin PieceMoveController on GameControllerInterface{
     }
 
     return false;
+  }
+
+  /*
+  For a castling move to be valid:
+  1 - Neither the King or the Rook were moved
+  2 - The King isnt in check, wont be after the castling, and wont cross any squares that are attacked
+  */
+  bool _isCastlingValid(King king, Move move){
+    if(!king.hasMoved!){
+      Rook? rook = _getCastleRook(king, move);
+      if(rook == null){
+        return false;
+      }
+
+      if(rook.hasMoved!){
+        return false;
+      }
+
+      var transientMoves = [];
+
+      for(int i = 0; i < move.displacement!.xPos!; i++){
+        transientMoves.add(Move(displacement: Coordinate(i, 0), moveType: MoveType.MOVE));
+      }
+
+      for(Move move in transientMoves){
+        if(_wiilTheKingBeInCheck(king , move)){
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    return false;
+  }
+
+  Rook? _getCastleRook(King king, Move move){
+    Rook? rook;
+    switch(move.displacement!.xPos! > 0){
+        case true:
+          for(Piece piece in board!.pieces){
+            if(piece.type! == PieceType.ROOK && piece.position!.xPos! > king.position!.xPos!){
+              rook = piece as Rook;
+            }
+          }
+          break;
+        case false:
+          for(Piece piece in board!.pieces){
+            if(piece.type! == PieceType.ROOK && piece.position!.xPos! < king.position!.xPos!){
+              rook = piece as Rook;
+            }
+          }
+          break;
+      }
+      return rook;
   }
 }

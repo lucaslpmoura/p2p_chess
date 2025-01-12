@@ -227,6 +227,8 @@ class King extends Piece{
       _moves!.add(Move(displacement: Coordinate(-i, i), moveType: MoveType.CAPTURE));
       _moves!.add(Move(displacement: Coordinate(-i, -i), moveType: MoveType.CAPTURE));
     }
+    _moves!.add(Move(displacement: Coordinate(2, 0), moveType: MoveType.KING_CASTLE));
+    _moves!.add(Move(displacement: Coordinate(-2, 0), moveType: MoveType.KING_CASTLE));
   }
 }
 
