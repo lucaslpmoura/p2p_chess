@@ -19,6 +19,32 @@ class Coordinate{
     }
     return false;
   }
+
+  bool isOnTheSameFile(Coordinate otherCoord){
+    return (otherCoord.xPos! == xPos!);
+  }
+  bool isOnTheLeftOf(Coordinate otherCoord){
+    if((otherCoord.xPos! - xPos!) == -1){
+      return true;
+    }
+    return false;
+  }
+
+  bool isOnTopOf(Coordinate otherCoord){
+    if((otherCoord.yPos! - yPos!) == -1){
+      return true;
+  }
+
+    return false;
+  }
+
+  bool isBellowOf(Coordinate otherCoord){
+    if((otherCoord.yPos! - yPos!) == 1){
+      return true;
+    }
+
+    return false;
+  }
  
   Coordinate operator +(covariant Coordinate coord){
     return Coordinate(

@@ -44,7 +44,7 @@ class _ChessboardState extends State<Chessboard> {
 
   void getPieceMoves(Piece piece){
     setState(() {
-      if(selectedPiece == null && gameController.getPlayerTurn() == piece.color){
+      if(selectedPiece != piece && gameController.getPlayerTurn() == piece.color){
         selectedPiece = piece;
         _currentMoves = gameController.getValidPieceMoves(piece);
 

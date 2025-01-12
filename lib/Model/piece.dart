@@ -55,7 +55,7 @@ class Piece {
 
   @override
   bool operator == (covariant Piece piece){
-    return (piece.type == this.type && piece.position == this.position && piece.color == this.color);
+    return (piece.type == this.type && piece.initialPosition == this.initialPosition && piece.color == this.color);
   }
 }
 class Pawn extends Piece{
@@ -67,12 +67,14 @@ class Pawn extends Piece{
 
   @override
   void _generateMoves(){
-    if(!isInverted!){
+    if(!isInverted){
       _moves = {
           Move(displacement:  Coordinate(0, 2), moveType: MoveType.PAWN_FIRST_MOVE),
           Move(displacement: Coordinate(0,1), moveType: MoveType.MOVE),
           Move(displacement: Coordinate(1,1), moveType: MoveType.CAPTURE),
           Move(displacement: Coordinate(-1,1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(1, 1), moveType: MoveType.PAWN_EN_PASSANT),
+          Move(displacement: Coordinate(-1, 1), moveType: MoveType.PAWN_EN_PASSANT)
       };
     }else{
       _moves = {
@@ -80,6 +82,7 @@ class Pawn extends Piece{
           Move(displacement: Coordinate(0,-1), moveType: MoveType.MOVE),
           Move(displacement: Coordinate(-1,-1), moveType: MoveType.CAPTURE),
           Move(displacement: Coordinate(1,-1), moveType: MoveType.CAPTURE),
+          
       };
     }
     

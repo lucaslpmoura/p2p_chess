@@ -20,12 +20,21 @@ class Board {
 
   ChessColor turn = ChessColor.LIGHT;
 
-  List<Move> lightMoves = [];
-  List<Move> darkMoves = [];
+
+  List<GameTurn> gameTurns = [];
+  
 
   List<Piece> get pieces => _pieces == null ? [] : _pieces!;
+
   void setPieceList(List<Piece>? pieces){
     _pieces = pieces;
+  }
+
+  MoveAnnotation? getLastMoveAnnotation(){
+    if(gameTurns.isNotEmpty){
+      return gameTurns.last.lastMove;
+    }
+    return null;
   }
 
   King getKing(ChessColor color){
@@ -100,9 +109,24 @@ Board testBoard = Board()..setPieceList(pieces);
 Board defaultBoard = Board()..generateDefaultPieces();
 
 class MoveAnnotation{
-  int? number;
   Piece piece;
   Move move;
+  late ChessColor color;
 
-  MoveAnnotation({required this.number, required this.piece, required this.move});
+  MoveAnnotation({required this.piece, required this.move}){
+    color = piece.color!;
+  }
+}
+
+class GameTurn{
+  MoveAnnotation lightMoveAnnotation;
+  MoveAnnotation? darkMoveAnnotation;
+
+  GameTurn({required this.lightMoveAnnotation});
+
+  void addDarkMove(MoveAnnotation darkMoveAnnotation){
+    this.darkMoveAnnotation = darkMoveAnnotation;
+  }
+
+  MoveAnnotation? get lastMove => darkMoveAnnotation ?? lightMoveAnnotation;
 }

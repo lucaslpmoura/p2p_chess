@@ -1,4 +1,5 @@
 import 'package:p2p_chess/Controller/game_controller.dart';
+import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/piece.dart';
 
 mixin BoardController on GameControllerInterface{
@@ -18,5 +19,14 @@ mixin BoardController on GameControllerInterface{
   }
 
   void addMoveToHistory(Piece piece, Move move){
+    MoveAnnotation moveAnnotation = MoveAnnotation(piece: piece, move: move);
+    if(piece.color == ChessColor.LIGHT){
+      board!.gameTurns.add(GameTurn(lightMoveAnnotation: moveAnnotation));
+    }
+    if(piece.color == ChessColor.DARK){
+      board!.gameTurns.last.addDarkMove(moveAnnotation);
+    }
   }
+
+  
 }

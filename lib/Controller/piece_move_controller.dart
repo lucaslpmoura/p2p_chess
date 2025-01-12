@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:p2p_chess/Controller/game_controller.dart';
+import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
 
@@ -66,8 +67,13 @@ mixin PieceMoveController on GameControllerInterface{
           // TODO: Handle PAWN_PROMOTION.
           throw UnimplementedError();
         case MoveType.PAWN_EN_PASSANT:
-          // TODO: Handle PAWN_EN_PASSANT.
-          throw UnimplementedError();
+          if(
+            _isEnPassantValid(piece as Pawn, move) &&
+            !_isTherePieceInFuturePos(piece, futurePos) &&
+            !_wiilTheKingBeInCheck(piece, move)
+          ){
+            validMoves.add(move);
+          }
         case MoveType.KING_CASTLE:
           // TODO: Handle KING_CASTLE.
           throw UnimplementedError();
@@ -86,6 +92,7 @@ mixin PieceMoveController on GameControllerInterface{
 
     //There must be a better way to do this
     (this as GameController).changePlayerTurn();
+    (this as GameController).addMoveToHistory(piece, move);
   }
 
 
@@ -310,5 +317,29 @@ mixin PieceMoveController on GameControllerInterface{
     king.isInCheck = false;
 
     return king.isInCheck;
+  }
+
+  /*
+  For an En Passant to be valid:
+  1- The last move by the enemy has to be the first move of the pawn
+  2- The player's pawn must be next to the enemy pawn
+
+  Plus all the other the normal checks made by getValidPieceMoves()
+  */
+  bool _isEnPassantValid(Pawn pawn, Move move){
+    MoveAnnotation? lastMoveAnnotation = board!.getLastMoveAnnotation();
+
+    if(lastMoveAnnotation != null){
+      if(lastMoveAnnotation.move.moveType == MoveType.PAWN_FIRST_MOVE){
+        if(
+          lastMoveAnnotation.piece.position!.isBellowOf(getPieceFuturePostion(pawn, move)) &&
+          lastMoveAnnotation.piece.position!.isOnTheSameFile(getPieceFuturePostion(pawn, move))
+          ){
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }
