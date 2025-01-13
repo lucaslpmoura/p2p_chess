@@ -14,6 +14,9 @@ class PromotionWidget extends StatelessWidget{
   Pawn? pawn;
   String? colorString;
 
+  double? leftLimit;
+  double? topLimit;
+
   PromotionWidget({required this.squareSize, required this.pawn, required this.onTap}){
     if(pawn!.color == ChessColor.LIGHT){
       colorString = "LIGHT";
@@ -25,13 +28,19 @@ class PromotionWidget extends StatelessWidget{
     
     scaledSquareSize = squareSize * scalingFactor;
     squareSizeDifference = squareSize - scaledSquareSize;
+    if(pawn!.position!.xPos! < 4){
+      leftLimit = (pawn!.drawPosition!.xPos! + 1) * squareSize;
+    }else{
+      leftLimit = (pawn!.drawPosition!.xPos! % 4) * squareSize;
+    }
+    topLimit = pawn!.drawPosition!.yPos! * squareSize;
   }
 
   @override
   Widget build(BuildContext context){
     return Positioned(
-      top: 0,
-      left: 0,
+      top: pawn!.drawPosition!.yPos! * squareSize,
+      left: leftLimit,
       child: Stack(
         children: [
           Container(

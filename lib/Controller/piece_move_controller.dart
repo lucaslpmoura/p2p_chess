@@ -24,7 +24,7 @@ mixin PieceMoveController on GameControllerInterface{
   Conditions for a piece to be moved:
   0 - it needs to be your Turn (TODO)
   1 - Movement cant be blocked by other piece (except knight)
-  2 - it cannot place your king in check (TODO)
+  2 - it cannot place your king in check 
 
   Special case: en passant, castle
   */
@@ -110,6 +110,11 @@ mixin PieceMoveController on GameControllerInterface{
       rook.updateDrawPosition();
     }
 
+    /*
+    Pawn promotion
+    The promotion flag is a solution to decouple the view from the game logic
+    It isnt very elegant but is working for now
+    */
     if(piece.type == PieceType.PAWN && (piece.position!.yPos == 0 || piece.position!.yPos == 7)){
       (piece as Pawn).needToPromote = true;
       (this as BoardController).addMoveToHistory(piece, move);

@@ -10,6 +10,4 @@ interface class GameControllerInterface{
 
 class GameController extends GameControllerInterface with PieceMoveController, BoardController{
   GameController({required super.board}); 
-
-  
 }
