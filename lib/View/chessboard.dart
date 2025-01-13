@@ -155,7 +155,7 @@ class _ChessboardState extends State<Chessboard> {
 //Took it from github/lichess-org/flutter-chessground
 //background.dart
 class ChessboardPainter extends CustomPainter {
-  Color lightColor = Colors.red;
+  Color lightColor = Color.fromRGBO(245, 245, 220, 1);
   Color darkColor = Colors.blue;
 
   @override

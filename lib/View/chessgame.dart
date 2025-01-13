@@ -9,11 +9,15 @@ class Chessgame extends StatelessWidget{
   @override
   Widget build (BuildContext context){
     return Scaffold(
-      body: SizedBox(
+      backgroundColor:Color.fromRGBO(211, 211, 211, 1.0),
+      body: SizedBox( 
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Flexible(child: Chessboard()),
-            Flexible(child: GameInfo()),
+            Expanded(flex: 2, child: LeftSideGameInfo()),
+            Flexible(flex: 6, child: Chessboard()),
+            Flexible(flex: 2, child: RightSideGameInfo()),
           ]
         )
       )

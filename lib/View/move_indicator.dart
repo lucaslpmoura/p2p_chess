@@ -61,8 +61,8 @@ class _MoveIndicatorPainter extends CustomPainter {
         Coordinate coord = piece!.position! + move!.displacement!;
         DrawCoordinate drawCoord = DrawCoordinate(coord.xPos!, coord.yPos!);
         Offset centerCoord = Offset(
-          (drawCoord.xPos!)  + squareSize!/2, 
-          (drawCoord.yPos!)  + squareSize!/2);
+          squareSize!/2, 
+          squareSize!/2);
         double radius = squareSize!/4;
         _paint.color = Colors.green;
         canvas.drawCircle(centerCoord , radius, _paint);
