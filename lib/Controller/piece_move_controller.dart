@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:p2p_chess/Controller/board_controller.dart';
 import 'package:p2p_chess/Controller/game_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/coordinate.dart';
@@ -63,9 +64,6 @@ mixin PieceMoveController on GameControllerInterface{
             validMoves.add(move);
           }
           break;
-        case MoveType.PAWN_PROMOTION:
-          // TODO: Handle PAWN_PROMOTION.
-          throw UnimplementedError();
         case MoveType.PAWN_EN_PASSANT:
           if(
             _isEnPassantValid(piece as Pawn, move) &&
@@ -92,6 +90,7 @@ mixin PieceMoveController on GameControllerInterface{
     if(move.moveType == MoveType.CAPTURE){
       capturePiece(piece, move);
     }
+
     piece.position = piece.position! + move.displacement!;
     piece.hasMoved = true;
     piece.updateDrawPosition();
@@ -106,14 +105,20 @@ mixin PieceMoveController on GameControllerInterface{
       if(rook.position!.xPos! < piece.position!.xPos!){
         rook.position = Coordinate(piece.position!.xPos! + 1, rook.position!.yPos!);
       }
-      
+
       rook.hasMoved = true;
       rook.updateDrawPosition();
     }
 
+    if(piece.type == PieceType.PAWN && (piece.position!.yPos == 0 || piece.position!.yPos == 7)){
+      (piece as Pawn).needToPromote = true;
+      (this as BoardController).addMoveToHistory(piece, move);
+      return;
+    }
+
     //There must be a better way to do this
-    (this as GameController).changePlayerTurn();
-    (this as GameController).addMoveToHistory(piece, move);
+    (this as BoardController).changePlayerTurn();
+    (this as BoardController).addMoveToHistory(piece, move);
   }
 
 
@@ -418,4 +423,6 @@ mixin PieceMoveController on GameControllerInterface{
       }
       return rook;
   }
+
+  
 }

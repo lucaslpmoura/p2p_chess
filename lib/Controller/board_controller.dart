@@ -28,5 +28,41 @@ mixin BoardController on GameControllerInterface{
     }
   }
 
+  void removePiece(Piece piece){
+    board!.pieces.removeWhere((pieceToRemove) => pieceToRemove == piece);
+  }
+
+  void addPiece(Piece piece){
+    board!.pieces.add(piece);
+  }
+
+  Pawn? isThereAPawnThatNeedsToPromote(){
+    for(Piece piece in board!.pieces){
+      if(piece.type == PieceType.PAWN && (piece as Pawn).needToPromote){
+        return piece;
+      }
+    }
+    return null;
+  }
+
+  void promotePawn(Pawn pawn, PieceType pieceType){
+    late Piece newPiece;
+    if(pieceType == PieceType.QUEEN ){
+      newPiece = Queen(color: pawn.color!, position: pawn.position);
+    }
+    if(pieceType == PieceType.ROOK){
+      newPiece = Rook(color: pawn.color!, position: pawn.position);
+    }
+    if(pieceType == PieceType.BISHOP){
+      newPiece = Bishop(color: pawn.color!, position: pawn.position);
+    }
+    if(pieceType == PieceType.KNIGHT){
+      newPiece = Knight(color: pawn.color!, position: pawn.position);
+    }
+    removePiece(pawn as Piece);
+    addPiece(newPiece);
+    
+    changePlayerTurn();
+  }
   
 }

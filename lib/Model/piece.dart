@@ -41,6 +41,7 @@ class Piece {
   Set<Move> get moves => _moves == null ? {} : _moves!;
 
   Piece({required this.color, required this.type, required this.position}){
+    initialPosition = position;
     _generateMoves();
     updateDrawPosition();
     hasMoved = false;
@@ -60,9 +61,12 @@ class Piece {
 }
 class Pawn extends Piece{
   bool isInverted;
+  late bool needToPromote;
+  
   Pawn({ChessColor? color, Coordinate? position, bool this.isInverted = false}) : super(color: color, type: PieceType.PAWN, position: position){
     _generateMoves();
     updateDrawPosition();
+    needToPromote = false;
   }
 
   @override
@@ -240,7 +244,6 @@ enum MoveType {
   CAPTURE,
 
   PAWN_FIRST_MOVE,
-  PAWN_PROMOTION,
   PAWN_EN_PASSANT,
 
   /*

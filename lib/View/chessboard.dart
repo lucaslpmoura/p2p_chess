@@ -8,6 +8,7 @@ import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
 import 'package:p2p_chess/View/move_indicator.dart';
 import 'package:p2p_chess/View/piece_widget.dart';
+import 'package:p2p_chess/View/promotion_widget.dart';
 
 
 class Chessboard extends StatefulWidget{
@@ -29,14 +30,27 @@ class _ChessboardState extends State<Chessboard> {
   Widget build(BuildContext context) {
     squareSize = MediaQuery.of(context).size.shortestSide / 8;
     var piecesWidgets = getAllPiecesWidgets(defaultBoard, MediaQuery.of(context).size);
+
     movesWidgets = drawPieceMoves(_currentMoves);
 
+    Pawn? pawnToPromote = gameController.isThereAPawnThatNeedsToPromote();
+    Widget? promotionWidget = _getPawnPromotionWidget(pawnToPromote);
+    
+
     List<Widget> drawObjects = [];
+    
+
     drawObjects.add(CustomPaint(painter: ChessboardPainter(), child: Container())); // Chessboard background
     drawObjects += piecesWidgets;
     if(movesWidgets != null){
       drawObjects += movesWidgets!;
     }
+    if(promotionWidget != null){
+      drawObjects.add(promotionWidget);
+    }
+
+    //drawObjects.add(PromotionWidget(squareSize: squareSize, color: ChessColor.DARK));
+
     return Stack(
       children: drawObjects
     );
@@ -68,8 +82,14 @@ class _ChessboardState extends State<Chessboard> {
   void movePiece(Piece piece, Move move){
     setState(() {
       gameController.movePiece(piece, move);
-      selectedPiece = null;
       _currentMoves = null;
+      selectedPiece = null;
+    });
+  }
+
+  void promotePawn(Pawn pawn, PieceType pieceType){
+    setState((){
+      gameController.promotePawn(pawn, pieceType);
     });
   }
 
@@ -90,7 +110,15 @@ class _ChessboardState extends State<Chessboard> {
       }
     }
     return pieceMoves;
-    
+
+  }
+
+  Widget? _getPawnPromotionWidget(Pawn? pawn){
+    if(pawn != null){
+      return PromotionWidget(squareSize: squareSize, pawn: pawn, onTap: promotePawn);
+    }else{
+      return null;
+    }
   }
 }
 
