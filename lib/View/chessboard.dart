@@ -12,48 +12,76 @@ import 'package:p2p_chess/View/promotion_widget.dart';
 
 
 class Chessboard extends StatefulWidget{
-  Chessboard({super.key});
+  double? maxSize;
+  Chessboard({super.key, this.maxSize});
 
-  State<Chessboard> createState() => _ChessboardState();
+  State<Chessboard> createState() => _ChessboardState(maxSize: maxSize);
 
 }
 
 class _ChessboardState extends State<Chessboard> {
 
-  double squareSize = 0;
-  GameController gameController = GameController(board: defaultBoard);
+
+
+  double? maxSize;
+  double squareSize = 1;
+  double? boardSize;
+
+  
+
   Set<Move>? _currentMoves;
   Piece? selectedPiece;
   List<Widget>? movesWidgets;
 
+  GameController gameController = GameController(board: defaultBoard);
+
+  _ChessboardState({required this.maxSize});
+
   @override
   Widget build(BuildContext context) {
-    squareSize = MediaQuery.of(context).size.shortestSide / 8;
-    var piecesWidgets = getAllPiecesWidgets(defaultBoard, MediaQuery.of(context).size);
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      boardSize = constraints.biggest.shortestSide;
 
-    movesWidgets = drawPieceMoves(_currentMoves);
+      squareSize = boardSize!/8;
 
-    Pawn? pawnToPromote = gameController.isThereAPawnThatNeedsToPromote();
-    Widget? promotionWidget = _getPawnPromotionWidget(pawnToPromote);
-    
+      var piecesWidgets = getAllPiecesWidgets(defaultBoard);
 
-    List<Widget> drawObjects = [];
-    
+      movesWidgets = drawPieceMoves(_currentMoves);
 
-    drawObjects.add(CustomPaint(painter: ChessboardPainter(), child: Container())); // Chessboard background
-    drawObjects += piecesWidgets;
-    if(movesWidgets != null){
-      drawObjects += movesWidgets!;
-    }
-    if(promotionWidget != null){
-      drawObjects.add(promotionWidget);
-    }
+      Pawn? pawnToPromote = gameController.isThereAPawnThatNeedsToPromote();
+      Widget? promotionWidget = _getPawnPromotionWidget(pawnToPromote);
+      
 
-    //drawObjects.add(PromotionWidget(squareSize: squareSize, color: ChessColor.DARK));
+      List<Widget> drawObjects = [];
+      
 
-    return Stack(
-      children: drawObjects
+      drawObjects.add(CustomPaint(painter: ChessboardPainter(), child: Container())); // Chessboard background
+      drawObjects += piecesWidgets;
+      if(movesWidgets != null){
+        drawObjects += movesWidgets!;
+      }
+      if(promotionWidget != null){
+        drawObjects.add(promotionWidget);
+      }
+
+      //drawObjects.add(PromotionWidget(squareSize: squareSize, color: ChessColor.DARK));
+
+      return Center(
+        child: AspectRatio(
+          aspectRatio: 1,
+          child: SizedBox(
+            width: boardSize,
+            height: boardSize,
+            child: Stack(
+              children: drawObjects
+            ),
+          ),
+        ),
+      );
+      }
     );
+
+    
   }
 
   void getPieceMoves(Piece piece){
@@ -93,7 +121,7 @@ class _ChessboardState extends State<Chessboard> {
     });
   }
 
-  List<Widget> getAllPiecesWidgets(Board board, Size size){
+  List<Widget> getAllPiecesWidgets(Board board){
     List<Widget> piecesWidgets = [];
     for (Piece piece in board.pieces){
       piecesWidgets.add(PieceWidget(squareSize: squareSize, piece: piece, onTap: getPieceMoves));
