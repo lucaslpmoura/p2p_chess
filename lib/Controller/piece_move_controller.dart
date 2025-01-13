@@ -98,17 +98,17 @@ mixin PieceMoveController on GameControllerInterface{
 
     if(move.moveType == MoveType.KING_CASTLE){
       Rook rook = _getCastleRook(piece as King, move)!;
-      for(Piece piece in board!.pieces ){
-        if(piece.hashCode == rook.hashCode){
-          print('aha!');
-        }
-      }
 
       if(rook.position!.xPos! > piece.position!.xPos!){
         rook.position = Coordinate(piece.position!.xPos! - 1, rook.position!.yPos!);
-        rook.hasMoved = true;
-        rook.updateDrawPosition();
+        
       }
+      if(rook.position!.xPos! < piece.position!.xPos!){
+        rook.position = Coordinate(piece.position!.xPos! + 1, rook.position!.yPos!);
+      }
+      
+      rook.hasMoved = true;
+      rook.updateDrawPosition();
     }
 
     //There must be a better way to do this
@@ -403,14 +403,14 @@ mixin PieceMoveController on GameControllerInterface{
     switch(move.displacement!.xPos! > 0){
         case true:
           for(Piece piece in board!.pieces){
-            if(piece.type! == PieceType.ROOK && piece.position!.xPos! > king.position!.xPos!){
+            if(piece.type! == PieceType.ROOK && piece.position!.xPos! > king.position!.xPos! && piece.color! == king.color){
               rook = piece as Rook;
             }
           }
           break;
         case false:
           for(Piece piece in board!.pieces){
-            if(piece.type! == PieceType.ROOK && piece.position!.xPos! < king.position!.xPos!){
+            if(piece.type! == PieceType.ROOK && piece.position!.xPos! < king.position!.xPos! && piece.color! == king.color){
               rook = piece as Rook;
             }
           }

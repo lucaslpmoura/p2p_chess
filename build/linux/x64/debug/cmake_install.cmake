@@ -1,8 +1,8 @@
-# Install script for directory: /home/lucas/Documents/Projects/Flutter/p2p_chess/linux
+# Install script for directory: /home/ie/Documents/Flutter/p2p_chess/linux
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle")
+  set(CMAKE_INSTALL_PREFIX "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -44,96 +44,96 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
   
-  file(REMOVE_RECURSE "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/")
+  file(REMOVE_RECURSE "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/")
   
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess")
+  if(EXISTS "$ENV{DESTDIR}/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess"
+         FILE "$ENV{DESTDIR}/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess"
          RPATH "$ORIGIN/lib")
   endif()
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess")
+   "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle" TYPE EXECUTABLE FILES "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/intermediates_do_not_run/p2p_chess")
-  if(EXISTS "$ENV{DESTDIR}/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess")
+  file(INSTALL DESTINATION "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle" TYPE EXECUTABLE FILES "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/intermediates_do_not_run/p2p_chess")
+  if(EXISTS "$ENV{DESTDIR}/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess")
     file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess"
-         OLD_RPATH "/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral:"
+         FILE "$ENV{DESTDIR}/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess"
+         OLD_RPATH "/home/ie/Documents/Flutter/p2p_chess/linux/flutter/ephemeral:"
          NEW_RPATH "$ORIGIN/lib")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/p2p_chess")
     endif()
   endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/icudtl.dat")
+   "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/icudtl.dat")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data" TYPE FILE FILES "/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/icudtl.dat")
+  file(INSTALL DESTINATION "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/data" TYPE FILE FILES "/home/ie/Documents/Flutter/p2p_chess/linux/flutter/ephemeral/icudtl.dat")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so")
+   "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/lib" TYPE FILE FILES "/home/lucas/Documents/Projects/Flutter/p2p_chess/linux/flutter/ephemeral/libflutter_linux_gtk.so")
+  file(INSTALL DESTINATION "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/lib" TYPE FILE FILES "/home/ie/Documents/Flutter/p2p_chess/linux/flutter/ephemeral/libflutter_linux_gtk.so")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/lib/")
+   "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/lib/")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/lib" TYPE DIRECTORY FILES "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/native_assets/linux/")
+  file(INSTALL DESTINATION "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/lib" TYPE DIRECTORY FILES "/home/ie/Documents/Flutter/p2p_chess/build/native_assets/linux/")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
   
-  file(REMOVE_RECURSE "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets")
+  file(REMOVE_RECURSE "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets")
   
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Runtime" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets")
+   "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/data/flutter_assets")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/bundle/data" TYPE DIRECTORY FILES "/home/lucas/Documents/Projects/Flutter/p2p_chess/build//flutter_assets")
+  file(INSTALL DESTINATION "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/bundle/data" TYPE DIRECTORY FILES "/home/ie/Documents/Flutter/p2p_chess/build//flutter_assets")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/flutter/cmake_install.cmake")
-  include("/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/runner/cmake_install.cmake")
+  include("/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/flutter/cmake_install.cmake")
+  include("/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/runner/cmake_install.cmake")
 
 endif()
 
@@ -145,5 +145,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/lucas/Documents/Projects/Flutter/p2p_chess/build/linux/x64/debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ie/Documents/Flutter/p2p_chess/build/linux/x64/debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
