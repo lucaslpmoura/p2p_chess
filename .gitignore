@@ -15,7 +15,6 @@ flutter_export_environment.sh
 flutter_export_environment.bat
 *.log
 pubspec.lock
-build/linux
 
 # iOS specific
 ios/Pods/
