@@ -8,14 +8,15 @@ mixin BoardController on GameControllerInterface{
   }
 
   void changePlayerTurn(){
-    if(board!.turn == ChessColor.LIGHT){
-      board!.turn = ChessColor.DARK;
-      return;
+  switch(board!.turn){
+      case ChessColor.LIGHT:
+        board!.turn = ChessColor.DARK;
+        break;
+      case ChessColor.DARK:
+        board!.turn = ChessColor.LIGHT;
+        break;
     }
-    if(board!.turn == ChessColor.DARK){
-      board!.turn = ChessColor.LIGHT;
-      return;
-    }
+    playerTurnNotifier.value = board!.turn;
   }
 
   void addMoveToHistory(Piece piece, Move move){

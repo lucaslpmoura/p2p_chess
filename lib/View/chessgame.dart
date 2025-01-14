@@ -1,10 +1,19 @@
 
 import 'package:flutter/material.dart';
-import 'package:p2p_chess/View/chessboard.dart';
-import 'package:p2p_chess/View/game_info.dart';
+import 'package:p2p_chess/Controller/game_controller.dart';
+import 'package:p2p_chess/Model/board.dart';
+import 'package:p2p_chess/Model/piece.dart';
+import 'package:p2p_chess/Model/player.dart';
+import 'package:p2p_chess/View/Chessboard/chessboard.dart';
+import 'package:p2p_chess/View/GameInfo/game_info.dart';
 
 class Chessgame extends StatelessWidget{
   Chessgame();
+
+
+  
+
+  GameController gameController = GameController(board: defaultBoard, players: testPlayers);
 
   @override
   Widget build (BuildContext context){
@@ -15,8 +24,8 @@ class Chessgame extends StatelessWidget{
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Expanded(flex: 2, child: LeftSideGameInfo()),
-            Flexible(flex: 6, child: Chessboard()),
+            Expanded(flex: 2, child: LeftSideGameInfo(gameController: gameController,)),
+            Flexible(flex: 6, child: Chessboard(gameController: gameController,)),
             Flexible(flex: 2, child: RightSideGameInfo()),
           ]
         )

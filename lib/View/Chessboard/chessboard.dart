@@ -6,16 +6,16 @@ import 'package:p2p_chess/Controller/game_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
-import 'package:p2p_chess/View/move_indicator.dart';
-import 'package:p2p_chess/View/piece_widget.dart';
-import 'package:p2p_chess/View/promotion_widget.dart';
+import 'package:p2p_chess/View/Chessboard/move_indicator.dart';
+import 'package:p2p_chess/View/Chessboard/piece_widget.dart';
+import 'package:p2p_chess/View/Chessboard/promotion_widget.dart';
 
 
 class Chessboard extends StatefulWidget{
-  double? maxSize;
-  Chessboard({super.key, this.maxSize});
+  GameController? gameController;
+  Chessboard({super.key, required this.gameController});
 
-  State<Chessboard> createState() => _ChessboardState(maxSize: maxSize);
+  State<Chessboard> createState() => _ChessboardState(gameController: gameController!);
 
 }
 
@@ -33,9 +33,10 @@ class _ChessboardState extends State<Chessboard> {
   Piece? selectedPiece;
   List<Widget>? movesWidgets;
 
-  GameController gameController = GameController(board: defaultBoard);
+  GameController gameController;
 
-  _ChessboardState({required this.maxSize});
+
+  _ChessboardState({required this.gameController});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class _ChessboardState extends State<Chessboard> {
 
       squareSize = boardSize!/8;
 
-      var piecesWidgets = getAllPiecesWidgets(defaultBoard);
+      var piecesWidgets = getAllPiecesWidgets(gameController.board!);
 
       movesWidgets = drawPieceMoves(_currentMoves);
 
