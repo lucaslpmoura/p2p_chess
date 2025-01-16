@@ -125,7 +125,12 @@ class _ChessboardState extends State<Chessboard> {
   List<Widget> getAllPiecesWidgets(Board board){
     List<Widget> piecesWidgets = [];
     for (Piece piece in board.pieces){
-      piecesWidgets.add(PieceWidget(squareSize: squareSize, piece: piece, onTap: getPieceMoves));
+      piece.type != PieceType.KING
+      ? piecesWidgets.add(PieceWidget(squareSize: squareSize, piece: piece, onTap: getPieceMoves))
+      : piecesWidgets.add(PieceWidget.KingPieceWidget(
+        squareSize: squareSize, piece: piece, 
+        onTap: getPieceMoves, 
+        checkNotifier: gameController.getKingCheckNotifier(piece.color!)));
     }
     return piecesWidgets;
   }

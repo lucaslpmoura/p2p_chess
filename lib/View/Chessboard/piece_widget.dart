@@ -7,21 +7,41 @@ class PieceWidget extends StatelessWidget{
   double squareSize = 1;
   Piece? piece;
   Function? onTap;
+  ValueNotifier<bool>? checkNotifier;
+
   PieceWidget({required this.squareSize, required this.piece, required this.onTap});
+  PieceWidget.KingPieceWidget({required this.squareSize, required this.piece, required this.onTap, required this.checkNotifier});
 
   @override
   Widget build (BuildContext context){
     Widget piecePicture = getPiecePicture();
-    return Positioned(
-      top: squareSize * piece!.drawPosition!.yPos!,
-      left: squareSize * piece!.drawPosition!.xPos!,
-      height: squareSize,
-      width: squareSize,
-      child: GestureDetector(
-        onTap: () => onTap!(piece),
-        child: piecePicture
-      ),
-    ); 
+    return checkNotifier == null
+      ? Positioned(
+        top: squareSize * piece!.drawPosition!.yPos!,
+        left: squareSize * piece!.drawPosition!.xPos!,
+        height: squareSize,
+        width: squareSize,
+        child: GestureDetector(
+          onTap: () => onTap!(piece),
+          child: piecePicture
+        ),
+      )
+    : ValueListenableBuilder(
+      valueListenable: checkNotifier!,
+      builder: (context, value, child) {
+        return Positioned(
+          top: squareSize * piece!.drawPosition!.yPos!,
+          left: squareSize * piece!.drawPosition!.xPos!,
+          height: squareSize,
+          width: squareSize,
+          child: GestureDetector(
+            onTap: () => onTap!(piece),
+            child: checkNotifier!.value ? kingCheckPicture(piece!.color!) : piecePicture
+          ),
+        );
+      }
+      
+    );
   }
 
   Widget getPiecePicture(){
@@ -45,5 +65,11 @@ class PieceWidget extends StatelessWidget{
       case PieceType.KING:
         return SvgPicture.asset('assets/images/chess_pieces/${color}_KING.svg');
     }
+  }
+
+  Widget kingCheckPicture(ChessColor color){
+    return color == ChessColor.LIGHT 
+    ? SvgPicture.asset('assets/images/chess_pieces/LIGHT_KING_CHECK.svg')
+    : SvgPicture.asset('assets/images/chess_pieces/DARK_KING_CHECK.svg');
   }
 }

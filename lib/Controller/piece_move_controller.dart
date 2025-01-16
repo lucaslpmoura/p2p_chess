@@ -124,6 +124,10 @@ mixin PieceMoveController on GameControllerInterface{
     //There must be a better way to do this
     (this as BoardController).changePlayerTurn();
     (this as BoardController).addMoveToHistory(piece, move);
+
+    //Needed so the King widgets are updated
+    _isKingInCheck(ChessColor.DARK);
+    _isKingInCheck(ChessColor.LIGHT);
   }
 
 
@@ -292,7 +296,7 @@ mixin PieceMoveController on GameControllerInterface{
 
       Piece? removedPiece = simulateMove(piece, move);
 
-      _isKingInCheck(piece.color!) ? validMove = false : validMove = true;
+      _isKingInCheck(piece.color!, false) ? validMove = false : validMove = true;
 
       undoMove(piece, move, removedPiece);
       _isKingInCheck(piece.color!);
@@ -315,7 +319,7 @@ mixin PieceMoveController on GameControllerInterface{
   This is necessary because using getValidPieceMoves() to check the validity of the moves
   would result in an infinite recursion.
   */
-  bool _isKingInCheck(ChessColor color){
+  bool _isKingInCheck(ChessColor color, [bool notifiyListerners = true]){
     var enemyPieces = board!.pieces.where((piece) => piece.color! != color);
     King king = board!.getKing(color);
 
@@ -340,13 +344,18 @@ mixin PieceMoveController on GameControllerInterface{
       for(Move validCaptureMove in validCaptureMoves){
         if(getPieceFuturePostion(piece, validCaptureMove) == king.position){
           king.isInCheck = true;
+          if(notifiyListerners){
+            (this as GameController).getKingCheckNotifier(color).value = king.isInCheck;
+          }
           return king.isInCheck;
         }
       }
     }
 
     king.isInCheck = false;
-
+    if(notifiyListerners){
+      (this as GameController).getKingCheckNotifier(color).value = king.isInCheck;
+    }
     return king.isInCheck;
   }
 

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:p2p_chess/Controller/game_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/piece.dart';
@@ -64,6 +65,10 @@ mixin BoardController on GameControllerInterface{
     addPiece(newPiece);
     
     changePlayerTurn();
+  }
+
+  ValueNotifier<bool> getKingCheckNotifier(ChessColor color){
+    return color == ChessColor.LIGHT ? lightKingCheckNotifier : darkKingCheckNotifier;
   }
   
 }
