@@ -133,6 +133,10 @@ mixin PieceMoveController on GameControllerInterface{
       return;
     }
 
+    if(piece.type == PieceType.PAWN && move.moveType == MoveType.PAWN_EN_PASSANT){
+      board!.pieces.removeWhere((piece) => piece == board!.getLastMoveAnnotation()!.piece);
+    }
+
     //There must be a better way to do this
     (this as BoardController).changePlayerTurn();
     (this as BoardController).addMoveToHistory(piece, move);
@@ -385,7 +389,15 @@ mixin PieceMoveController on GameControllerInterface{
     if(lastMoveAnnotation != null){
       if(lastMoveAnnotation.move.moveType == MoveType.PAWN_FIRST_MOVE){
         if(
+          !pawn.isInverted &&
           lastMoveAnnotation.piece.position!.isBellowOf(getPieceFuturePostion(pawn, move)) &&
+          lastMoveAnnotation.piece.position!.isOnTheSameFile(getPieceFuturePostion(pawn, move))
+          ){
+          return true;
+        }
+        if(
+          pawn.isInverted &&
+          lastMoveAnnotation.piece.position!.isOnTopOf(getPieceFuturePostion(pawn, move)) &&
           lastMoveAnnotation.piece.position!.isOnTheSameFile(getPieceFuturePostion(pawn, move))
           ){
           return true;

@@ -9,4 +9,4 @@ class Player {
 }
 
 List<Player> testPlayers = [Player(color: ChessColor.LIGHT, nickname: "João"), 
-                          Player(color: ChessColor.DARK, nickname: "Player 2")];
+                          Player(color: ChessColor.DARK, nickname: "José")];

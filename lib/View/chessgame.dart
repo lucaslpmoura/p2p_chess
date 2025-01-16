@@ -13,7 +13,7 @@ class Chessgame extends StatelessWidget{
 
   
 
-  GameController gameController = GameController(board: testBoard, players: testPlayers);
+  GameController gameController = GameController(board: defaultBoard, players: testPlayers);
 
   @override
   Widget build (BuildContext context){

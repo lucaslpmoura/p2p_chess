@@ -86,6 +86,8 @@ class Pawn extends Piece{
           Move(displacement: Coordinate(0,-1), moveType: MoveType.MOVE),
           Move(displacement: Coordinate(-1,-1), moveType: MoveType.CAPTURE),
           Move(displacement: Coordinate(1,-1), moveType: MoveType.CAPTURE),
+          Move(displacement: Coordinate(1, -1), moveType: MoveType.PAWN_EN_PASSANT),
+          Move(displacement: Coordinate(-1, -1), moveType: MoveType.PAWN_EN_PASSANT)
           
       };
     }
