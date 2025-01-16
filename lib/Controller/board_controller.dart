@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p2p_chess/Controller/game_controller.dart';
+import 'package:p2p_chess/Controller/match_controller.dart';
+import 'package:p2p_chess/Controller/piece_move_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/piece.dart';
 
@@ -64,11 +66,31 @@ mixin BoardController on GameControllerInterface{
     removePiece(pawn as Piece);
     addPiece(newPiece);
     
+    (this as PieceMoveController).isKingInCheck(ChessColor.LIGHT);
+    (this as PieceMoveController).isKingInCheck(ChessColor.DARK);
+    print((this as MatchController).getMatchState());
     changePlayerTurn();
   }
 
   ValueNotifier<bool> getKingCheckNotifier(ChessColor color){
     return color == ChessColor.LIGHT ? lightKingCheckNotifier : darkKingCheckNotifier;
+  }
+
+  bool isThereAKingInCheck(){
+    if((this as PieceMoveController).isKingInCheck(ChessColor.LIGHT) || (this as PieceMoveController).isKingInCheck(ChessColor.DARK)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  bool areOnlyKingsInPlay(){
+    for(Piece piece in board!.pieces){
+      if (piece.type != PieceType.KING){
+        return false;
+      }
+    }
+    return true;
   }
   
 }

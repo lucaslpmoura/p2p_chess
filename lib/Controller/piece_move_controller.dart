@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:p2p_chess/Controller/board_controller.dart';
 import 'package:p2p_chess/Controller/game_controller.dart';
+import 'package:p2p_chess/Controller/match_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
@@ -28,11 +29,11 @@ mixin PieceMoveController on GameControllerInterface{
 
   Special case: en passant, castle
   */
-  Set<Move>? getValidPieceMoves(Piece piece){
+  Set<Move> getValidPieceMoves(Piece piece){
     Set<Move> allMoves = getPieceMoves(piece)!;
     Set<Move> validMoves = {};
 
-    
+
     for(Move move in allMoves){
       Coordinate futurePos = (piece.position! + move.displacement!);
       switch(move.moveType!){
@@ -76,7 +77,7 @@ mixin PieceMoveController on GameControllerInterface{
           if(
             _isCastlingValid(piece as King, move) &&
             !_isTherePieceBlockingTheWay(piece, move) &&
-            !_isKingInCheck(piece.color!) &&
+            !isKingInCheck(piece.color!) &&
             !_wiilTheKingBeInCheck(piece, move)
           ) {
             validMoves.add(move);
@@ -84,6 +85,17 @@ mixin PieceMoveController on GameControllerInterface{
       }
     }
     return validMoves;
+  }
+
+  Set<Move> getValidPlayerMoves(ChessColor color){
+    Set<Move> validPlayerMoves = {};
+    for(Piece piece in board!.pieces){
+      if(piece.color == color){
+        Set<Move> validPieceMoves = getValidPieceMoves(piece);
+        validPlayerMoves.addAll(validPieceMoves);
+      }
+    }
+    return validPlayerMoves;
   }
 
   void movePiece(Piece piece, Move move){
@@ -126,8 +138,9 @@ mixin PieceMoveController on GameControllerInterface{
     (this as BoardController).addMoveToHistory(piece, move);
 
     //Needed so the King widgets are updated
-    _isKingInCheck(ChessColor.DARK);
-    _isKingInCheck(ChessColor.LIGHT);
+    isKingInCheck(ChessColor.DARK);
+    isKingInCheck(ChessColor.LIGHT);
+    print((this as MatchController).getMatchState());
   }
 
 
@@ -296,10 +309,10 @@ mixin PieceMoveController on GameControllerInterface{
 
       Piece? removedPiece = simulateMove(piece, move);
 
-      _isKingInCheck(piece.color!, false) ? validMove = false : validMove = true;
+      isKingInCheck(piece.color!, false) ? validMove = false : validMove = true;
 
       undoMove(piece, move, removedPiece);
-      _isKingInCheck(piece.color!);
+      isKingInCheck(piece.color!);
 
 
     /*Need to negate it to make sense with the question structure of the functions
@@ -319,7 +332,7 @@ mixin PieceMoveController on GameControllerInterface{
   This is necessary because using getValidPieceMoves() to check the validity of the moves
   would result in an infinite recursion.
   */
-  bool _isKingInCheck(ChessColor color, [bool notifiyListerners = true]){
+  bool isKingInCheck(ChessColor color, [bool notifiyListerners = true]){
     var enemyPieces = board!.pieces.where((piece) => piece.color! != color);
     King king = board!.getKing(color);
 

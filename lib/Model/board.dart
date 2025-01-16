@@ -28,6 +28,16 @@ class Board {
 
   void setPieceList(List<Piece>? pieces){
     _pieces = pieces;
+    pieces ??= [];
+
+    for(Piece piece in pieces){
+      if(piece.type == PieceType.KING && piece.color! == ChessColor.LIGHT){
+        lightKing = piece as King;
+      }
+      if(piece.type == PieceType.KING && piece.color! == ChessColor.DARK){
+        darkKing = piece as King;
+      }
+    }
   }
 
   MoveAnnotation? getLastMoveAnnotation(){
@@ -55,6 +65,9 @@ class Board {
     }
   } 
 
+  void setTurn(ChessColor newTurn){
+    turn = newTurn;
+  }
   void generateDefaultPieces() {
     _pieces = [];
 
@@ -104,9 +117,42 @@ List<Piece>? pieces = [
   King(color: ChessColor.LIGHT, position: Coordinate(3,3))
 ];
 
+List<Piece>? onlyKings = [
+  King(color: ChessColor.LIGHT, position: Coordinate(1, 1)),
+  King(color: ChessColor.DARK, position: Coordinate(5, 1)),
+];
 
-Board testBoard = Board()..setPieceList(pieces);
+// Korchnoi vs. Karpov, 1978 
+List<Piece>? drawnPieces = [
+  King(color: ChessColor.LIGHT, position: Coordinate(5, 7)),
+  Bishop(color: ChessColor.LIGHT, position: Coordinate(6, 6)),
+  Pawn(color: ChessColor.LIGHT, position: Coordinate(0, 2)),
+
+  King(color: ChessColor.DARK, position: Coordinate(7, 6)),
+  Pawn(color: ChessColor.DARK, position: Coordinate(0, 3), isInverted: true),
+];
+
+List<Piece>? kingVsKingPieces = [
+  King(color: ChessColor.LIGHT, position: Coordinate(0, 0)),
+  King(color: ChessColor.DARK, position: Coordinate(7, 7)),
+];
+List<Piece>? kingVsKingAndKnightPieces = <Piece>[
+  Knight(color: ChessColor.DARK, position: Coordinate(0, 1))
+] + kingVsKingPieces!;
+
+List<Piece>? kingVsKingAndBishopPieces = <Piece>[
+  Bishop(color: ChessColor.LIGHT,position: Coordinate(0, 1))
+] + kingVsKingPieces!;
+
+List<Piece>? kingAndBishopsSameColorPieces = <Piece>[
+  Bishop(color: ChessColor.DARK, position: Coordinate(0, 1)),
+  Bishop(color: ChessColor.LIGHT, position: Coordinate(0, 3)),
+] + kingVsKingPieces!;
+
+Board testBoard = Board()..setPieceList(kingAndBishopsSameColorPieces);
 Board defaultBoard = Board()..generateDefaultPieces();
+
+
 
 class MoveAnnotation{
   Piece piece;

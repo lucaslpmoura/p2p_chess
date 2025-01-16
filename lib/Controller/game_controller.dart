@@ -20,5 +20,7 @@ interface class GameControllerInterface{
 
 class GameController extends GameControllerInterface with PieceMoveController, BoardController, MatchController{
 
-  GameController({required super.board, required super.players}); 
+  GameController({required super.board, required super.players}){
+    playerTurnNotifier.value = board!.turn;
+  }
 }

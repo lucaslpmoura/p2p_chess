@@ -1,17 +1,27 @@
 
+import 'package:p2p_chess/Model/piece.dart';
+
 class Coordinate{
   Coordinate(int x, int y){
     _coord = [x,y];
+    if((x+y) % 2 == 0){
+      _squareColor = ChessColor.DARK;
+    }else{
+      _squareColor = ChessColor.LIGHT;
+    }
   }
-  CoordinateFromArray(List<int> coord){
+  
+  Coordinate.CoordinateFromArray(List<int> coord){
     _coord = coord;
   }
 
   List<int>? _coord;
+  ChessColor? _squareColor;
 
   int? get xPos => _coord == null ? null : _coord?[0];
   int? get yPos => _coord == null ? null : _coord?[1];
   List<int>? get coord => _coord;
+  ChessColor? get squareColor => _squareColor;
 
   bool isOutOfBounds(){
     if(xPos! > 7 || xPos! < 0 || yPos! > 7 || yPos! < 0){
