@@ -68,7 +68,7 @@ mixin BoardController on GameControllerInterface{
     
     (this as PieceMoveController).isKingInCheck(ChessColor.LIGHT);
     (this as PieceMoveController).isKingInCheck(ChessColor.DARK);
-    print((this as MatchController).getMatchState());
+    (this as MatchController).notifyMatchState();
     changePlayerTurn();
   }
 

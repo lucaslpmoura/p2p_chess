@@ -149,7 +149,7 @@ List<Piece>? kingAndBishopsSameColorPieces = <Piece>[
   Bishop(color: ChessColor.LIGHT, position: Coordinate(0, 3)),
 ] + kingVsKingPieces!;
 
-Board testBoard = Board()..setPieceList(kingAndBishopsSameColorPieces);
+Board testBoard = Board()..setPieceList(drawnPieces);
 Board defaultBoard = Board()..generateDefaultPieces();
 
 

@@ -15,6 +15,12 @@ mixin MatchController on GameControllerInterface{
     return players![1];
   }
 
+  Player getPlayer(ChessColor color){
+    return players![0].color == color ?  players![0] : players![1];
+  }
+
+  
+
   MatchState getMatchState(){
     var validLightMoves = (this as GameController).getValidPlayerMoves(ChessColor.LIGHT);
     var validDarkMoves = (this as GameController).getValidPlayerMoves(ChessColor.DARK);
@@ -37,6 +43,10 @@ mixin MatchController on GameControllerInterface{
     }
 
     return MatchState.ONGOING;
+  }
+
+  void notifyMatchState(){
+    matchStateNotifier.value = getMatchState();
   }
 
   

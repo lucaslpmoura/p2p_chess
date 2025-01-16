@@ -30,6 +30,9 @@ mixin PieceMoveController on GameControllerInterface{
   Special case: en passant, castle
   */
   Set<Move> getValidPieceMoves(Piece piece){
+     if(matchStateNotifier.value != MatchState.ONGOING){
+      return {};
+    }
     Set<Move> allMoves = getPieceMoves(piece)!;
     Set<Move> validMoves = {};
 
@@ -144,7 +147,7 @@ mixin PieceMoveController on GameControllerInterface{
     //Needed so the King widgets are updated
     isKingInCheck(ChessColor.DARK);
     isKingInCheck(ChessColor.LIGHT);
-    print((this as MatchController).getMatchState());
+    (this as MatchController).notifyMatchState();
   }
 
 

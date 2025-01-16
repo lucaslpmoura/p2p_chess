@@ -15,6 +15,8 @@ interface class GameControllerInterface{
   ValueNotifier<bool> lightKingCheckNotifier = ValueNotifier(false);
   ValueNotifier<bool> darkKingCheckNotifier = ValueNotifier(false);
 
+  ValueNotifier<MatchState> matchStateNotifier = ValueNotifier<MatchState>(MatchState.ONGOING);
+
   GameControllerInterface({required this.board, required this.players});
 }
 
@@ -22,5 +24,6 @@ class GameController extends GameControllerInterface with PieceMoveController, B
 
   GameController({required super.board, required super.players}){
     playerTurnNotifier.value = board!.turn;
+    matchStateNotifier.value = getMatchState();
   }
 }
