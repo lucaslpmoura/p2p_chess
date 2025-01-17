@@ -6,9 +6,9 @@ import 'package:p2p_chess/Controller/game_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
-import 'package:p2p_chess/View/Chessboard/move_indicator.dart';
-import 'package:p2p_chess/View/Chessboard/piece_widget.dart';
-import 'package:p2p_chess/View/Chessboard/promotion_widget.dart';
+import 'package:p2p_chess/View/Game/Chessboard/move_indicator.dart';
+import 'package:p2p_chess/View/Game/Chessboard/piece_widget.dart';
+import 'package:p2p_chess/View/Game/Chessboard/promotion_widget.dart';
 
 
 class Chessboard extends StatefulWidget{

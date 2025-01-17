@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:p2p_chess/Controller/game_controller.dart';
 import 'package:p2p_chess/Model/piece.dart';
-import 'package:p2p_chess/View/GameInfo/match_state_indicator.dart';
-import 'package:p2p_chess/View/GameInfo/player_turn_indicator.dart';
+import 'package:p2p_chess/View/Game/Game%20Info/match_state_indicator.dart';
+import 'package:p2p_chess/View/Game/Game%20Info/player_turn_indicator.dart';
 
 class LeftSideGameInfo extends StatefulWidget{
   GameController? gameController;
@@ -32,7 +32,8 @@ class _LeftSideGameInfoState extends State<LeftSideGameInfo> {
               //color: Colors.red,
               child: PlayerTurnIndicator(player: gameController!.getPlayer2(), gameController: gameController!)
             ),
-            Expanded(child: Container()),
+            
+            Spacer(),
 
             Align(
               alignment: Alignment.center,
@@ -43,7 +44,7 @@ class _LeftSideGameInfoState extends State<LeftSideGameInfo> {
                   )
             )),
 
-            Expanded(child: Container()),
+            Spacer(),
 
             //Player 1
             SizedBox(
@@ -78,13 +79,45 @@ class _RightSideGameInfoState extends State<RightSideGameInfo> {
   Widget build(BuildContext context){
     return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints){
       return Container(
-        color:Color.fromRGBO(169, 204, 227, 1.0),
-        child: Column(
-          children: [
+          height: constraints.maxHeight,
+          width: constraints.maxWidth,
+          color:Color.fromRGBO(169, 204, 227, 1.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              children: [
+                
+                Spacer(),
+
+                //Draw Button
+                ElevatedButton(
+                  style: customButtonStyle,
+                  onPressed: () => {}, 
+                  child: Icon(Icons.flag)
+                ),
             
-          ],
-        )
-      );
+                //Home Button
+                ElevatedButton(
+                  style: customButtonStyle,
+                  onPressed: () => Navigator.pushNamed(context, '/home'), 
+                  child: Icon(Icons.home)
+                ),
+
+                Spacer()
+            
+              ],
+            ),
+          )
+        );
     });
+    
   }
+
+  ButtonStyle customButtonStyle = ButtonStyle(
+    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+      )
+    )
+  );
 }

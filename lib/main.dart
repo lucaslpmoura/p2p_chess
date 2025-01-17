@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:p2p_chess/View/chessgame.dart';
+import 'package:p2p_chess/View/Main%20Page/main_page.dart';
+import 'package:p2p_chess/View/Game/chessgame.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,6 +8,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  final bool skipMainPage = true;
 
   // This widget is the root of your application.
   @override
@@ -17,7 +20,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  Chessgame(),
+      
+      initialRoute: skipMainPage ? '/game' : '/home',
+      routes: {
+        '/home' : (context) => MainPage(),
+        '/game' : (context) => Chessgame()
+      }
     );
   }
 }
