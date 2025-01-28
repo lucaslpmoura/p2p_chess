@@ -7,41 +7,41 @@ import 'package:p2p_chess/Model/piece.dart';
 
 mixin BoardController on GameControllerInterface{
   ChessColor getPlayerTurn(){
-    return board!.turn;
+    return board.turn;
   }
 
   void changePlayerTurn(){
-  switch(board!.turn){
+  switch(board.turn){
       case ChessColor.LIGHT:
-        board!.turn = ChessColor.DARK;
+        board.turn = ChessColor.DARK;
         break;
       case ChessColor.DARK:
-        board!.turn = ChessColor.LIGHT;
+        board.turn = ChessColor.LIGHT;
         break;
     }
-    playerTurnNotifier.value = board!.turn;
+    playerTurnNotifier!.value = board.turn;
   }
 
   void addMoveToHistory(Piece piece, Move move){
     MoveAnnotation moveAnnotation = MoveAnnotation(piece: piece, move: move);
     if(piece.color == ChessColor.LIGHT){
-      board!.gameTurns.add(GameTurn(lightMoveAnnotation: moveAnnotation));
+      board.gameTurns.add(GameTurn(lightMoveAnnotation: moveAnnotation));
     }
     if(piece.color == ChessColor.DARK){
-      board!.gameTurns.last.addDarkMove(moveAnnotation);
+      board.gameTurns.last.addDarkMove(moveAnnotation);
     }
   }
 
   void removePiece(Piece piece){
-    board!.pieces.removeWhere((pieceToRemove) => pieceToRemove == piece);
+    board.pieces.removeWhere((pieceToRemove) => pieceToRemove == piece);
   }
 
   void addPiece(Piece piece){
-    board!.pieces.add(piece);
+    board.pieces.add(piece);
   }
 
   Pawn? isThereAPawnThatNeedsToPromote(){
-    for(Piece piece in board!.pieces){
+    for(Piece piece in board.pieces){
       if(piece.type == PieceType.PAWN && (piece as Pawn).needToPromote){
         return piece;
       }
@@ -73,7 +73,7 @@ mixin BoardController on GameControllerInterface{
   }
 
   ValueNotifier<bool> getKingCheckNotifier(ChessColor color){
-    return color == ChessColor.LIGHT ? lightKingCheckNotifier : darkKingCheckNotifier;
+    return color == ChessColor.LIGHT ? lightKingCheckNotifier! : darkKingCheckNotifier!;
   }
 
   bool isThereAKingInCheck(){
@@ -85,7 +85,7 @@ mixin BoardController on GameControllerInterface{
   }
 
   bool areOnlyKingsInPlay(){
-    for(Piece piece in board!.pieces){
+    for(Piece piece in board.pieces){
       if (piece.type != PieceType.KING){
         return false;
       }

@@ -30,7 +30,7 @@ mixin PieceMoveController on GameControllerInterface{
   Special case: en passant, castle
   */
   Set<Move> getValidPieceMoves(Piece piece){
-     if(matchStateNotifier.value != MatchState.ONGOING){
+     if(matchStateNotifier!.value != MatchState.ONGOING){
       return {};
     }
     Set<Move> allMoves = getPieceMoves(piece)!;

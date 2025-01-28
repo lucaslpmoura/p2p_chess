@@ -2,14 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:p2p_chess/Controller/game_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
-import 'package:p2p_chess/Model/piece.dart';
 import 'package:p2p_chess/Model/player.dart';
 import 'package:p2p_chess/View/Game/Chessboard/chessboard.dart';
 import 'package:p2p_chess/View/Game/Game%20Info/game_info.dart';
 
-class Chessgame extends StatelessWidget{
+class Chessgame extends StatefulWidget {
   Chessgame();
 
+  @override
+  State<Chessgame> createState() => _ChessgameState();
+}
+
+class _ChessgameState extends State<Chessgame>{
   GameController gameController = GameController(board: defaultBoard, players: testPlayers);
 
   @override
@@ -21,13 +25,18 @@ class Chessgame extends StatelessWidget{
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Expanded(flex: 2, child: LeftSideGameInfo(gameController: gameController,)),
-            Flexible(flex: 6, child: Chessboard(gameController: gameController,)),
-            Flexible(flex: 2, child: RightSideGameInfo(gameController: gameController,)),
+            Expanded(flex: 2, child: LeftSideGameInfo(gameController: gameController)),
+            Flexible(flex: 6, child: Chessboard(gameController: gameController)),
+            Flexible(flex: 2, child: RightSideGameInfo(gameController: gameController, restartGameFunction: restartGame,)),
           ]
         )
       )
     );
   }
 
+  void restartGame(){
+    setState(() {
+      gameController.restartMatch();
+    });
+  }
 }

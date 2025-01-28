@@ -29,7 +29,7 @@ class PlayerTurnIndicatorState extends State<PlayerTurnIndicator> {
   Widget build(BuildContext context){
     
     return ValueListenableBuilder<ChessColor?>(
-      valueListenable: gameController!.playerTurnNotifier,
+      valueListenable: gameController!.playerTurnNotifier!,
       builder: (context, turnColor, child){
         return Align(
           alignment: Alignment.center,
@@ -39,7 +39,7 @@ class PlayerTurnIndicatorState extends State<PlayerTurnIndicator> {
                 WidgetSpan(
                   child: Icon(
                     Icons.circle,
-                    color: (turnColor == player!.color! && gameController!.matchStateNotifier.value == MatchState.ONGOING)
+                    color: (turnColor == player!.color! && gameController!.matchStateNotifier!.value == MatchState.ONGOING)
                     ? Colors.green 
                     : Colors.white
                   )

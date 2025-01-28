@@ -21,7 +21,7 @@ mixin MatchController on GameControllerInterface{
 
   
 
-  MatchState getMatchState(){
+  MatchState getMatchState([bool forceDraw = false]){
     var validLightMoves = (this as GameController).getValidPlayerMoves(ChessColor.LIGHT);
     var validDarkMoves = (this as GameController).getValidPlayerMoves(ChessColor.DARK);
 
@@ -37,7 +37,9 @@ mixin MatchController on GameControllerInterface{
     if(
       ((this as BoardController).getPlayerTurn() == ChessColor.LIGHT && validLightMoves.isEmpty && !(this as PieceMoveController).isKingInCheck(ChessColor.LIGHT)) ||
       ((this as BoardController).getPlayerTurn() == ChessColor.DARK && validDarkMoves.isEmpty && !(this as PieceMoveController).isKingInCheck(ChessColor.DARK)) ||
-      !isSufficientMaterialOnBoard()
+      !isSufficientMaterialOnBoard() ||
+      forceDraw
+
     ){
       return MatchState.DRAW;
     }
@@ -45,8 +47,25 @@ mixin MatchController on GameControllerInterface{
     return MatchState.ONGOING;
   }
 
+  void forceDraw(){
+
+    /*
+    This is needed so the turn indicator blanks out
+    as intended
+    */
+    switch(playerTurnNotifier!.value){
+      case ChessColor.DARK:
+        playerTurnNotifier!.value = ChessColor.LIGHT;
+        break;
+      case ChessColor.LIGHT:
+        playerTurnNotifier!.value = ChessColor.DARK;
+        break;
+    }
+    matchStateNotifier!.value = getMatchState(true);  
+  }
+
   void notifyMatchState(){
-    matchStateNotifier.value = getMatchState();
+    matchStateNotifier!.value = getMatchState();
   }
 
   
@@ -88,6 +107,13 @@ mixin MatchController on GameControllerInterface{
     }
 
     return true;
+  }
+
+  void restartMatch(){
+    board = originalBoard!;
+    
+    matchStateNotifier!.value = MatchState.ONGOING;
+    playerTurnNotifier!.value = originalBoard!.turn;
   }
   
 }

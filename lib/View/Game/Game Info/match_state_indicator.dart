@@ -24,7 +24,7 @@ class MatchStateIndicatorState extends State<MatchStateIndicator>{
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<MatchState>(
-      valueListenable: gameController!.matchStateNotifier, 
+      valueListenable: gameController!.matchStateNotifier!, 
       builder: (context, matchState, child){
         return matchStateWidget(matchState);  
       }

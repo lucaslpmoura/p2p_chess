@@ -3,7 +3,6 @@ Class representing the field of play
 Tracks:
 - Player turn;
 - Pieces in play;
-TODO: Number of moves, history of moves
 */
 
 import 'package:p2p_chess/Model/coordinate.dart';
@@ -20,9 +19,17 @@ class Board {
 
   ChessColor turn = ChessColor.LIGHT;
 
-
   List<GameTurn> gameTurns = [];
   
+  Board.from(Board otherBoard){
+    _pieces = List.from(otherBoard._pieces!);
+    setPieceList(_pieces);
+    capturedPieces = List.from(otherBoard.capturedPieces);
+    turn = otherBoard.turn;
+    gameTurns = List.from(otherBoard.gameTurns);
+
+
+  }
 
   List<Piece> get pieces => _pieces == null ? [] : _pieces!;
 

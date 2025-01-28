@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:p2p_chess/Controller/game_controller.dart';
+import 'package:p2p_chess/Controller/match_controller.dart';
 import 'package:p2p_chess/Model/piece.dart';
 import 'package:p2p_chess/View/Game/Game%20Info/match_state_indicator.dart';
 import 'package:p2p_chess/View/Game/Game%20Info/player_turn_indicator.dart';
@@ -62,10 +63,14 @@ class _LeftSideGameInfoState extends State<LeftSideGameInfo> {
 
 class RightSideGameInfo extends StatefulWidget{
   GameController? gameController;
+  Function restartGameFunction;
 
-  RightSideGameInfo({super.key, required this.gameController});
+  RightSideGameInfo({super.key, required this.gameController, required this.restartGameFunction});
 
-  State<RightSideGameInfo> createState () => _RightSideGameInfoState(gameController: gameController);
+  State<RightSideGameInfo> createState () => _RightSideGameInfoState(
+    gameController: gameController, 
+    restartGameFunction: restartGameFunction
+    );
 
 
 
@@ -73,8 +78,9 @@ class RightSideGameInfo extends StatefulWidget{
 
 class _RightSideGameInfoState extends State<RightSideGameInfo> {
   GameController? gameController;
+  Function restartGameFunction;
 
-  _RightSideGameInfoState({required this.gameController});
+  _RightSideGameInfoState({required this.gameController, required this.restartGameFunction});
 
   Widget build(BuildContext context){
     return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints){
@@ -89,18 +95,34 @@ class _RightSideGameInfoState extends State<RightSideGameInfo> {
                 
                 Spacer(),
 
-                //Draw Button
-                ElevatedButton(
-                  style: customButtonStyle,
-                  onPressed: () => {}, 
-                  child: Icon(Icons.flag)
-                ),
+                
             
                 //Home Button
                 ElevatedButton(
                   style: customButtonStyle,
                   onPressed: () => Navigator.pushNamed(context, '/home'), 
                   child: Icon(Icons.home)
+                ),
+
+                ValueListenableBuilder(
+                  valueListenable: gameController!.matchStateNotifier!,
+                   builder: (context, matchState, child){
+                    return (matchState != MatchState.ONGOING)
+                    //Restart game button
+                    ? ElevatedButton(
+                        style: customButtonStyle,
+                        onPressed: () => restartGameFunction(), 
+                        child: Icon(Icons.restart_alt_rounded)
+                      )
+                    
+                    //Agree to draw button
+                    : ElevatedButton(
+                      style: customButtonStyle,
+                      onPressed: () => gameController!.forceDraw(), 
+                      child: Icon(Icons.flag)
+                    );
+                
+                  }
                 ),
 
                 Spacer()

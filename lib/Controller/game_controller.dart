@@ -7,23 +7,32 @@ import 'package:p2p_chess/Model/piece.dart';
 import 'package:p2p_chess/Model/player.dart';
 
 interface class GameControllerInterface{
-  Board? board;
+  Board board;
+  Board? originalBoard;
   
   List<Player>? players;
 
-  ValueNotifier<ChessColor> playerTurnNotifier = ValueNotifier(ChessColor.LIGHT);
-  ValueNotifier<bool> lightKingCheckNotifier = ValueNotifier(false);
-  ValueNotifier<bool> darkKingCheckNotifier = ValueNotifier(false);
+  ValueNotifier<ChessColor>? playerTurnNotifier;
+  ValueNotifier<bool>? lightKingCheckNotifier;
+  ValueNotifier<bool>? darkKingCheckNotifier;
 
-  ValueNotifier<MatchState> matchStateNotifier = ValueNotifier<MatchState>(MatchState.ONGOING);
+  ValueNotifier<bool>? restartNotifier;
+  ValueNotifier<MatchState>? matchStateNotifier;
 
-  GameControllerInterface({required this.board, required this.players});
+  GameControllerInterface({required this.board, required this.players}){
+    playerTurnNotifier = ValueNotifier(board.turn);
+    lightKingCheckNotifier = ValueNotifier(board.isKingInCheck(ChessColor.LIGHT));
+    darkKingCheckNotifier = ValueNotifier(board.isKingInCheck(ChessColor.DARK));
+    matchStateNotifier = ValueNotifier(MatchState.ONGOING);
+
+  }
 }
 
 class GameController extends GameControllerInterface with PieceMoveController, BoardController, MatchController{
 
   GameController({required super.board, required super.players}){
-    playerTurnNotifier.value = board!.turn;
-    matchStateNotifier.value = getMatchState();
+    playerTurnNotifier!.value = board.turn;
+    matchStateNotifier!.value = getMatchState();
+    originalBoard = Board.from(board);
   }
 }
