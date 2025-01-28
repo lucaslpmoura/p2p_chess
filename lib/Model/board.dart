@@ -22,11 +22,33 @@ class Board {
   List<GameTurn> gameTurns = [];
   
   Board.from(Board otherBoard){
-    _pieces = List.from(otherBoard._pieces!);
+    _pieces = [];
+    for(Piece piece in otherBoard.pieces){
+      switch(piece.type!){
+        case PieceType.PAWN:
+          _pieces!.add(Pawn.from(piece as Pawn));
+        case PieceType.KNIGHT:
+          _pieces!.add(Knight.from(piece));
+        case PieceType.ROOK:
+          _pieces!.add(Rook.from(piece));
+        case PieceType.BISHOP:
+          _pieces!.add(Bishop.from(piece));
+        case PieceType.QUEEN:
+          _pieces!.add(Queen.from(piece));
+        case PieceType.KING:
+          _pieces!.add(King.from(piece));
+      }
+    }
     setPieceList(_pieces);
-    capturedPieces = List.from(otherBoard.capturedPieces);
+    capturedPieces = [];
+    for(Piece piece in otherBoard.capturedPieces){
+      this.capturedPieces.add(Piece.from(piece));
+    }
     turn = otherBoard.turn;
-    gameTurns = List.from(otherBoard.gameTurns);
+    gameTurns = [];
+    for(GameTurn turn in otherBoard.gameTurns){
+      this.gameTurns.add(GameTurn.from(turn));
+    }
 
 
   }
@@ -162,20 +184,32 @@ Board defaultBoard = Board()..generateDefaultPieces();
 
 
 class MoveAnnotation{
-  Piece piece;
-  Move move;
-  late ChessColor color;
+  Piece? piece;
+  Move? move;
+  late ChessColor? color;
 
   MoveAnnotation({required this.piece, required this.move}){
-    color = piece.color!;
+    color = piece!.color!;
   }
+
+  MoveAnnotation.from(MoveAnnotation otherMoveAnnotation){
+    this.move = Move.from(otherMoveAnnotation.move!);
+    this.piece = Piece.from(otherMoveAnnotation.piece!);
+    this.color = otherMoveAnnotation.color!;
+  }
+
+
 }
 
 class GameTurn{
-  MoveAnnotation lightMoveAnnotation;
+  MoveAnnotation? lightMoveAnnotation;
   MoveAnnotation? darkMoveAnnotation;
 
   GameTurn({required this.lightMoveAnnotation});
+  GameTurn.from(GameTurn otherTurn){
+    this.lightMoveAnnotation = MoveAnnotation.from(otherTurn.lightMoveAnnotation!);
+    darkMoveAnnotation = otherTurn.darkMoveAnnotation;
+  }
 
   void addDarkMove(MoveAnnotation darkMoveAnnotation){
     this.darkMoveAnnotation = darkMoveAnnotation;

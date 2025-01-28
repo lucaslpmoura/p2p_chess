@@ -42,7 +42,7 @@ mixin BoardController on GameControllerInterface{
 
   Pawn? isThereAPawnThatNeedsToPromote(){
     for(Piece piece in board.pieces){
-      if(piece.type == PieceType.PAWN && (piece as Pawn).needToPromote){
+      if(piece.type == PieceType.PAWN && (piece as Pawn).needToPromote!){
         return piece;
       }
     }

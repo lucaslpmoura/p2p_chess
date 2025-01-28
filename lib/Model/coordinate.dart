@@ -10,6 +10,11 @@ class Coordinate{
       _squareColor = ChessColor.LIGHT;
     }
   }
+
+  Coordinate.from(Coordinate otherCoord){
+    this._coord = otherCoord._coord;
+    this._squareColor = otherCoord._squareColor;
+  }
   
   Coordinate.CoordinateFromArray(List<int> coord){
     _coord = coord;
@@ -81,4 +86,6 @@ class DrawCoordinate extends Coordinate{
   DrawCoordinate(super.x, super.y){
     _coord =  [_coord![0], _coord![1] * (-1) + 7];
   }
+
+  DrawCoordinate.from(DrawCoordinate otherDrawCoordinate) : super.from(otherDrawCoordinate as Coordinate);
 }

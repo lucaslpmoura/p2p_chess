@@ -14,7 +14,7 @@ class Chessgame extends StatefulWidget {
 }
 
 class _ChessgameState extends State<Chessgame>{
-  GameController gameController = GameController(board: defaultBoard, players: testPlayers);
+  GameController gameController = GameController(board: Board.from(defaultBoard), players: testPlayers);
 
   @override
   Widget build (BuildContext context){

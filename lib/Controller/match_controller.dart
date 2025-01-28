@@ -110,7 +110,7 @@ mixin MatchController on GameControllerInterface{
   }
 
   void restartMatch(){
-    board = originalBoard!;
+    board = Board.from(originalBoard!);
     
     matchStateNotifier!.value = MatchState.ONGOING;
     playerTurnNotifier!.value = originalBoard!.turn;

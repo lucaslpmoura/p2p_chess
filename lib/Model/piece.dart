@@ -47,6 +47,21 @@ class Piece {
     hasMoved = false;
   }
 
+  Piece.from(Piece otherPiece){
+    this.type = otherPiece.type;
+    this.color = otherPiece.color;
+    _moves = {};
+    for(Move move in otherPiece._moves!){
+      this._moves!.add(Move.from(move));
+    }
+    this.initialPosition = Coordinate.from(otherPiece.initialPosition!);
+    this.position = Coordinate.from(otherPiece.position!);
+    this.drawPosition = DrawCoordinate.from(otherPiece.drawPosition!);
+
+    this.isInPlay = otherPiece.isInPlay;
+    this.hasMoved = otherPiece.hasMoved;
+  }
+
   void updateDrawPosition(){
     drawPosition = DrawCoordinate(position!.xPos!, position!.yPos!);
   }
@@ -60,8 +75,8 @@ class Piece {
   }
 }
 class Pawn extends Piece{
-  bool isInverted;
-  late bool needToPromote;
+  bool? isInverted;
+  late bool? needToPromote;
   
   Pawn({ChessColor? color, Coordinate? position, bool this.isInverted = false}) : super(color: color, type: PieceType.PAWN, position: position){
     _generateMoves();
@@ -69,9 +84,14 @@ class Pawn extends Piece{
     needToPromote = false;
   }
 
+  Pawn.from(Pawn otherPawn) : super.from(otherPawn as Piece) {
+    isInverted = otherPawn.isInverted;
+    needToPromote = otherPawn.needToPromote;
+  }
+
   @override
   void _generateMoves(){
-    if(!isInverted){
+    if(!isInverted!){
       _moves = {
           Move(displacement:  Coordinate(0, 2), moveType: MoveType.PAWN_FIRST_MOVE),
           Move(displacement: Coordinate(0,1), moveType: MoveType.MOVE),
@@ -99,6 +119,8 @@ class Knight extends Piece{
     _generateMoves();
     updateDrawPosition();
   }
+
+  Knight.from(super.otherPiece) : super.from();
 
   @override
   void _generateMoves(){
@@ -130,6 +152,8 @@ class Bishop extends Piece{
     updateDrawPosition();
   }
 
+  Bishop.from(super.otherPiece) : super.from();
+
   @override
   void _generateMoves(){
     _moves = {};
@@ -154,6 +178,8 @@ class Rook extends Piece{
     updateDrawPosition();
   }
 
+  Rook.from(super.otherPiece) : super.from();
+
   @override
   void _generateMoves(){
     _moves = {};
@@ -177,6 +203,8 @@ class Queen extends Piece{
     _generateMoves();
     updateDrawPosition();
   }
+
+  Queen.from(super.otherPiece) : super.from();
 
   @override
   void _generateMoves(){
@@ -211,6 +239,8 @@ class King extends Piece{
     _generateMoves();
     updateDrawPosition();
   }
+
+  King.from(super.otherPiece) : super.from();
 
   @override
   void _generateMoves(){
@@ -268,6 +298,10 @@ class Move{
   MoveType? moveType;
 
   Move({required this.displacement, required this.moveType});
+  Move.from(Move otherMove){
+    this.displacement = Coordinate.from(otherMove.displacement!);
+    this.moveType = otherMove.moveType!;
+  }
 
   //Creates a move that undo the one passed in the argumet
   // ignore: non_constant_identifier_names

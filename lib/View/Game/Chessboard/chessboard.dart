@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:p2p_chess/Controller/game_controller.dart';
+import 'package:p2p_chess/Controller/match_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';
@@ -40,45 +41,50 @@ class _ChessboardState extends State<Chessboard> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-      boardSize = constraints.biggest.shortestSide;
-
-      squareSize = boardSize!/8;
-
-      var piecesWidgets = getAllPiecesWidgets(gameController.board!);
-
-      movesWidgets = drawPieceMoves(_currentMoves);
-
-      Pawn? pawnToPromote = gameController.isThereAPawnThatNeedsToPromote();
-      Widget? promotionWidget = _getPawnPromotionWidget(pawnToPromote);
-      
-
-      List<Widget> drawObjects = [];
-      
-
-      drawObjects.add(CustomPaint(painter: ChessboardPainter(), child: Container())); // Chessboard background
-      drawObjects += piecesWidgets;
-      if(movesWidgets != null){
-        drawObjects += movesWidgets!;
-      }
-      if(promotionWidget != null){
-        drawObjects.add(promotionWidget);
-      }
-
-      //drawObjects.add(PromotionWidget(squareSize: squareSize, color: ChessColor.DARK));
-
-      return Center(
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: SizedBox(
-            width: boardSize,
-            height: boardSize,
-            child: Stack(
-              children: drawObjects
+    return ValueListenableBuilder<MatchState>(
+      valueListenable: gameController.matchStateNotifier!,
+      builder: (context, matchState, child){
+        return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+          boardSize = constraints.biggest.shortestSide;
+        
+          squareSize = boardSize!/8;
+        
+          var piecesWidgets = getAllPiecesWidgets(gameController.board);
+        
+          movesWidgets = drawPieceMoves(_currentMoves);
+        
+          Pawn? pawnToPromote = gameController.isThereAPawnThatNeedsToPromote();
+          Widget? promotionWidget = _getPawnPromotionWidget(pawnToPromote);
+          
+        
+          List<Widget> drawObjects = [];
+          
+        
+          drawObjects.add(CustomPaint(painter: ChessboardPainter(), child: Container())); // Chessboard background
+          drawObjects += piecesWidgets;
+          if(movesWidgets != null){
+            drawObjects += movesWidgets!;
+          }
+          if(promotionWidget != null){
+            drawObjects.add(promotionWidget);
+          }
+        
+          //drawObjects.add(PromotionWidget(squareSize: squareSize, color: ChessColor.DARK));
+        
+          return Center(
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: SizedBox(
+                width: boardSize,
+                height: boardSize,
+                child: Stack(
+                  children: drawObjects
+                ),
+              ),
             ),
-          ),
-        ),
-      );
+          );
+          }
+        );
       }
     );
 

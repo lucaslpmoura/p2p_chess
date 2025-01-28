@@ -390,18 +390,18 @@ mixin PieceMoveController on GameControllerInterface{
     MoveAnnotation? lastMoveAnnotation = board!.getLastMoveAnnotation();
 
     if(lastMoveAnnotation != null){
-      if(lastMoveAnnotation.move.moveType == MoveType.PAWN_FIRST_MOVE){
+      if(lastMoveAnnotation.move!.moveType == MoveType.PAWN_FIRST_MOVE){
         if(
-          !pawn.isInverted &&
-          lastMoveAnnotation.piece.position!.isBellowOf(getPieceFuturePostion(pawn, move)) &&
-          lastMoveAnnotation.piece.position!.isOnTheSameFile(getPieceFuturePostion(pawn, move))
+          !pawn.isInverted! &&
+          lastMoveAnnotation.piece!.position!.isBellowOf(getPieceFuturePostion(pawn, move)) &&
+          lastMoveAnnotation.piece!.position!.isOnTheSameFile(getPieceFuturePostion(pawn, move))
           ){
           return true;
         }
         if(
-          pawn.isInverted &&
-          lastMoveAnnotation.piece.position!.isOnTopOf(getPieceFuturePostion(pawn, move)) &&
-          lastMoveAnnotation.piece.position!.isOnTheSameFile(getPieceFuturePostion(pawn, move))
+          pawn.isInverted! &&
+          lastMoveAnnotation.piece!.position!.isOnTopOf(getPieceFuturePostion(pawn, move)) &&
+          lastMoveAnnotation.piece!.position!.isOnTheSameFile(getPieceFuturePostion(pawn, move))
           ){
           return true;
         }
