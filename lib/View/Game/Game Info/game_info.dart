@@ -100,7 +100,27 @@ class _RightSideGameInfoState extends State<RightSideGameInfo> {
                 //Home Button
                 ElevatedButton(
                   style: customButtonStyle,
-                  onPressed: () => Navigator.pushNamed(context, '/home'), 
+                  onPressed: () {
+                    showDialog(
+                      context: context, 
+                      builder: (context){
+                        return AlertDialog(
+                          content: const Text("Are you you want to return to the main menu?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(), 
+                              child: const Text("Cancel")
+                            ),
+                            Spacer(),
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pushNamed("/home"), 
+                              child: Text("Confirm")
+                            ),
+                          ]
+                        );
+                      }
+                    );
+                  }, 
                   child: Icon(Icons.home)
                 ),
 
