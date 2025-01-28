@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p2p_chess/View/Game%20Setup/LocalGamePage.dart';
 import 'package:p2p_chess/View/Main%20Page/main_page.dart';
 import 'package:p2p_chess/View/Game/chessgame.dart';
 
@@ -9,7 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  final bool skipMainPage = true;
+  final bool skipMainPage = false;
 
   // This widget is the root of your application.
   @override
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       initialRoute: skipMainPage ? '/game' : '/home',
       routes: {
         '/home' : (context) => MainPage(),
-        '/game' : (context) => Chessgame()
+        '/game' : (context) => Chessgame(),
+        '/localGame' : (context) => LocalGamePage(),
       }
     );
   }

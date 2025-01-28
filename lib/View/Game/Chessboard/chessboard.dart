@@ -2,8 +2,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:p2p_chess/Controller/game_controller.dart';
-import 'package:p2p_chess/Controller/match_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/game_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/match_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/coordinate.dart';
 import 'package:p2p_chess/Model/piece.dart';

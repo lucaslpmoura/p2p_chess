@@ -31,7 +31,9 @@ class _MainPageSate extends State<MainPage>{
           child: Column(
             children: [
               ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, '/game'), 
+                onPressed: () => setState(() {
+                  currentState = PageState.GAME_PAGE;
+                }), 
                 child: Text('Play')
               ),
           
@@ -68,6 +70,44 @@ class _MainPageSate extends State<MainPage>{
         ),
         );
         break;
+
+        case PageState.GAME_PAGE:
+        mainPageBody = Align(
+          alignment: Alignment.center,
+          child: SizedBox(
+            height: 200,
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pushNamed('/localGame'), 
+                  child: const Text("Local Game")
+                ),
+                Spacer(),
+                ElevatedButton(
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: const Text("Not Implemented!"),
+                    duration: Duration(seconds: 2))),  
+                  child: const Text("LAN Game")
+                ),
+                Spacer(),
+                ElevatedButton(
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: const Text("Not Implemented!"),
+                    duration: Duration(seconds: 2))),
+                  child: const Text("Internet Game")
+                ),
+                Spacer(),
+                ElevatedButton(
+                onPressed: () => setState(() {
+                  currentState = PageState.MAIN_PAGE;
+                }), 
+                child: Text('Back')
+              ),
+              ],
+            ),
+          ),
+        );
+        break;
     }
     return mainPageBody;
   }
@@ -76,5 +116,6 @@ class _MainPageSate extends State<MainPage>{
 
   enum PageState {
     MAIN_PAGE,
+    GAME_PAGE,
     SETTINGS
   }

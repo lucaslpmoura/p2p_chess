@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:p2p_chess/Controller/game_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/game_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/player.dart';
 import 'package:p2p_chess/View/Game/Chessboard/chessboard.dart';
@@ -14,7 +14,7 @@ class Chessgame extends StatefulWidget {
 }
 
 class _ChessgameState extends State<Chessgame>{
-  GameController gameController = GameController(board: Board.from(defaultBoard), players: testPlayers);
+  GameController gameController = GameController(board: Board.from(defaultBoard), players: players);
 
   @override
   Widget build (BuildContext context){

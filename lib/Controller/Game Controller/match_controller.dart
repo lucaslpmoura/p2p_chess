@@ -1,7 +1,7 @@
 
-import 'package:p2p_chess/Controller/board_controller.dart';
-import 'package:p2p_chess/Controller/game_controller.dart';
-import 'package:p2p_chess/Controller/piece_move_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/board_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/game_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/piece_move_controller.dart';
 import 'package:p2p_chess/Model/board.dart';
 import 'package:p2p_chess/Model/piece.dart';
 import 'package:p2p_chess/Model/player.dart';
@@ -115,6 +115,7 @@ mixin MatchController on GameControllerInterface{
     matchStateNotifier!.value = MatchState.ONGOING;
     playerTurnNotifier!.value = originalBoard!.turn;
   }
+
   
 }
 

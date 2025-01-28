@@ -10,3 +10,5 @@ class Player {
 
 List<Player> testPlayers = [Player(color: ChessColor.LIGHT, nickname: "João"), 
                           Player(color: ChessColor.DARK, nickname: "Jeremias")];
+
+List<Player> players = [];

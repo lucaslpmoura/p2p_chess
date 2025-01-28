@@ -3,8 +3,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:p2p_chess/Controller/game_controller.dart';
-import 'package:p2p_chess/Controller/match_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/game_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/match_controller.dart';
 import 'package:p2p_chess/Model/piece.dart';
 import 'package:p2p_chess/Model/player.dart';
 

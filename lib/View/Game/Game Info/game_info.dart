@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:p2p_chess/Controller/game_controller.dart';
-import 'package:p2p_chess/Controller/match_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/game_controller.dart';
+import 'package:p2p_chess/Controller/Game%20Controller/match_controller.dart';
 import 'package:p2p_chess/Model/piece.dart';
 import 'package:p2p_chess/View/Game/Game%20Info/match_state_indicator.dart';
 import 'package:p2p_chess/View/Game/Game%20Info/player_turn_indicator.dart';
