@@ -92,7 +92,7 @@ mixin PieceMoveController on GameControllerInterface{
 
   Set<Move> getValidPlayerMoves(ChessColor color){
     Set<Move> validPlayerMoves = {};
-    for(Piece piece in board!.pieces){
+    for(Piece piece in board.pieces){
       if(piece.color == color){
         Set<Move> validPieceMoves = getValidPieceMoves(piece);
         validPlayerMoves.addAll(validPieceMoves);
@@ -137,7 +137,7 @@ mixin PieceMoveController on GameControllerInterface{
     }
 
     if(piece.type == PieceType.PAWN && move.moveType == MoveType.PAWN_EN_PASSANT){
-      board!.pieces.removeWhere((piece) => piece == board!.getLastMoveAnnotation()!.piece);
+      board.pieces.removeWhere((piece) => piece == board.getLastMoveAnnotation()!.piece);
     }
 
     //There must be a better way to do this
@@ -174,18 +174,18 @@ mixin PieceMoveController on GameControllerInterface{
     
     if(removedPiece != null){
       //TODO: Board Controller
-      board!.pieces.add(removedPiece);
+      board.pieces.add(removedPiece);
     }
   }
 
 
   Piece? capturePiece(Piece capturerPiece, Move move){
-    for(Piece capturedPiece in board!.pieces){
+    for(Piece capturedPiece in board.pieces){
       if(capturedPiece.position! == getPieceFuturePostion(capturerPiece, move)){
         Piece? capturedPieceCopy = capturedPiece;
         //TODO: Board controller
-        board!.capturedPieces.add(capturedPiece);
-        board!.pieces.removeWhere((piece) => piece.position! == getPieceFuturePostion(capturerPiece, move));
+        board.capturedPieces.add(capturedPiece);
+        board.pieces.removeWhere((piece) => piece.position! == getPieceFuturePostion(capturerPiece, move));
         return capturedPieceCopy;
       }
     }
@@ -449,14 +449,14 @@ mixin PieceMoveController on GameControllerInterface{
     Rook? rook;
     switch(move.displacement!.xPos! > 0){
         case true:
-          for(Piece piece in board!.pieces){
+          for(Piece piece in board.pieces){
             if(piece.type! == PieceType.ROOK && piece.position!.xPos! > king.position!.xPos! && piece.color! == king.color){
               rook = piece as Rook;
             }
           }
           break;
         case false:
-          for(Piece piece in board!.pieces){
+          for(Piece piece in board.pieces){
             if(piece.type! == PieceType.ROOK && piece.position!.xPos! < king.position!.xPos! && piece.color! == king.color){
               rook = piece as Rook;
             }

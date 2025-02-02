@@ -8,15 +8,15 @@ import 'package:p2p_chess/Model/player.dart';
 
 mixin MatchController on GameControllerInterface{
   Player getPlayer1(){
-    return players![0];
+    return players[0];
   }
 
   Player getPlayer2(){
-    return players![1];
+    return players[1];
   }
 
   Player getPlayer(ChessColor color){
-    return players![0].color == color ?  players![0] : players![1];
+    return players[0].color == color ?  players[0] : players[1];
   }
 
   

@@ -45,10 +45,13 @@ class _ChessboardState extends State<Chessboard> {
       valueListenable: gameController.matchStateNotifier!,
       builder: (context, matchState, child){
         return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+          if(matchState == MatchState.DRAW){
+            selectedPiece = null;
+          }
           boardSize = constraints.biggest.shortestSide;
         
           squareSize = boardSize!/8;
-        
+          
           var piecesWidgets = getAllPiecesWidgets(gameController.board);
         
           movesWidgets = drawPieceMoves(_currentMoves);
